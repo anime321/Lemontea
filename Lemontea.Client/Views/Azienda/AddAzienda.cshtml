@@ -1,0 +1,117 @@
+﻿@model Azienda 
+
+<div>
+  @Html.ActionLink("Back", "Index")
+</div>
+
+@using (Html.BeginForm("SaveAzienda", "Azienda", FormMethod.Post, new { id = "azienda_form" } ))
+{
+  @Html.AntiForgeryToken()
+
+  @Html.HiddenFor(model => model.Id);
+
+  @if (Model != null && Model.Id != 0)
+  {
+    <script>
+      var editingAzienda = true;
+    </script>
+
+    // // use an extension loaded in Startup.cs
+    // @Html.HttpMethodOverride(4); //HttpVerbs.Put)
+  }
+  else
+  {
+    <script>
+      var editingAzienda = false;
+    </script>
+  }
+
+  <div class="form-group" row col>
+    @Html.LabelFor(model => model.RagioneSociale, "Ragione sociale")
+    @Html.EditorFor(model => model.RagioneSociale, new { htmlAttributes = new { @class = "form-control" } })
+  </div>
+
+  <div class="row">
+    <div class="form-group col-8">
+      @Html.LabelFor(model => model.Indirizzo, "Indirizzo")
+      @Html.EditorFor(model => model.Indirizzo, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+    <div class="form-group col-2">
+      @Html.LabelFor(model => model.NCivico, "N° civico")
+      @Html.EditorFor(model => model.NCivico, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+    <div class="form-group col-2">
+      @Html.LabelFor(model => model.CAP, "CAP")
+      @Html.EditorFor(model => model.CAP, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col">
+      @Html.LabelFor(model => model.Nazione, "Nazione")
+      @Html.EditorFor(model => model.Nazione, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+    <div class="form-group col">
+      @Html.LabelFor(model => model.Provincia, "Provincia")
+      @Html.EditorFor(model => model.Provincia, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+    <div class="form-group col">
+      @Html.LabelFor(model => model.Citta, "Città")
+      @Html.EditorFor(model => model.Citta, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col">
+      @Html.LabelFor(model => model.Telefono, "Telefono")
+      @Html.EditorFor(model => model.Telefono, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+    <div class="form-group col">
+      @Html.LabelFor(model => model.Fax, "Fax")
+      @Html.EditorFor(model => model.Fax, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+    <div class="form-group col">
+      @Html.LabelFor(model => model.Email, "Email aziendale")
+      @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-4">
+      @Html.LabelFor(model => model.SitoWeb, "Sito Web")
+      @Html.EditorFor(model => model.SitoWeb, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="form-group col-4">
+      @Html.LabelFor(model => model.PartitaIVA, "Partita IVA")
+      @Html.EditorFor(model => model.PartitaIVA, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+    <div class="form-group col-4">
+      @Html.LabelFor(model => model.CodiceFiscale, "Codice fiscale")
+      @Html.EditorFor(model => model.CodiceFiscale, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+  </div>
+
+  <div class="row col">
+    <button type="submit" id="submit_button" class="btn btn-primary">Save</button>
+  </div>
+}
+
+<script>
+  $('#submit_button').click(e => {
+    // detect validation stuff
+
+    $.ajax({
+      url: editingAzienda ? '/Azienda/EditAzienda' : '/Azienda/SaveAzienda',
+      method: editingAzienda ? 'PUT' : 'POST',
+      data: $('#azienda_form').serialize(),
+      success: data => {
+        console.log('submitted!');
+      }
+    });
+  });
+</script>
+

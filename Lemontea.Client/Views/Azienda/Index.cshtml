@@ -1,0 +1,10 @@
+﻿@model List<Azienda>
+<ul class="list-group">
+  <a asp-area="" asp-controller="Azienda" asp-action="AddAzienda">Add...</a>
+  @foreach (Azienda a in Model)
+  {
+    <li class="list-group-item">
+      <a asp-area="" asp-controller="Azienda" asp-action="AddAzienda" asp-route-id="@a.Id">@a.RagioneSociale</a>
+    </li>
+  }
+</ul>
