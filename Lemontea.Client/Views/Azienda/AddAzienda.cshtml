@@ -1,5 +1,9 @@
 ﻿@model Azienda 
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
+
 <div>
   @Html.ActionLink("Back", "Index")
 </div>
@@ -9,6 +13,8 @@
   @Html.AntiForgeryToken()
 
   @Html.HiddenFor(model => model.Id);
+
+  @Html.ValidationSummary(true, "")
 
   @if (Model != null && Model.Id != 0)
   {
@@ -29,20 +35,24 @@
   <div class="form-group" row col>
     @Html.LabelFor(model => model.RagioneSociale, "Ragione sociale")
     @Html.EditorFor(model => model.RagioneSociale, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.RagioneSociale, "")
   </div>
 
   <div class="row">
     <div class="form-group col-8">
       @Html.LabelFor(model => model.Indirizzo, "Indirizzo")
       @Html.EditorFor(model => model.Indirizzo, new { htmlAttributes = new { @class = "form-control" } })
+      @Html.ValidationMessageFor(model => model.Indirizzo, "")
     </div>
     <div class="form-group col-2">
       @Html.LabelFor(model => model.NCivico, "N° civico")
       @Html.EditorFor(model => model.NCivico, new { htmlAttributes = new { @class = "form-control" } })
+      @Html.ValidationMessageFor(model => model.NCivico, "")
     </div>
     <div class="form-group col-2">
       @Html.LabelFor(model => model.CAP, "CAP")
       @Html.EditorFor(model => model.CAP, new { htmlAttributes = new { @class = "form-control" } })
+      @Html.ValidationMessageFor(model => model.CAP, "")
     </div>
   </div>
 
@@ -50,14 +60,17 @@
     <div class="form-group col">
       @Html.LabelFor(model => model.Nazione, "Nazione")
       @Html.EditorFor(model => model.Nazione, new { htmlAttributes = new { @class = "form-control" } })
+      @Html.ValidationMessageFor(model => model.Nazione, "")
     </div>
     <div class="form-group col">
       @Html.LabelFor(model => model.Provincia, "Provincia")
       @Html.EditorFor(model => model.Provincia, new { htmlAttributes = new { @class = "form-control" } })
+      @Html.ValidationMessageFor(model => model.Provincia, "")
     </div>
     <div class="form-group col">
       @Html.LabelFor(model => model.Citta, "Città")
       @Html.EditorFor(model => model.Citta, new { htmlAttributes = new { @class = "form-control" } })
+      @Html.ValidationMessageFor(model => model.Citta, "")
     </div>
   </div>
 
@@ -65,14 +78,17 @@
     <div class="form-group col">
       @Html.LabelFor(model => model.Telefono, "Telefono")
       @Html.EditorFor(model => model.Telefono, new { htmlAttributes = new { @class = "form-control" } })
+      @Html.ValidationMessageFor(model => model.Telefono, "")
     </div>
     <div class="form-group col">
       @Html.LabelFor(model => model.Fax, "Fax")
       @Html.EditorFor(model => model.Fax, new { htmlAttributes = new { @class = "form-control" } })
+      @Html.ValidationMessageFor(model => model.Fax, "")
     </div>
     <div class="form-group col">
       @Html.LabelFor(model => model.Email, "Email aziendale")
       @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+      @Html.ValidationMessageFor(model => model.Email, "")
     </div>
   </div>
 
@@ -80,6 +96,7 @@
     <div class="form-group col-4">
       @Html.LabelFor(model => model.SitoWeb, "Sito Web")
       @Html.EditorFor(model => model.SitoWeb, new { htmlAttributes = new { @class = "form-control" } })
+      @Html.ValidationMessageFor(model => model.SitoWeb, "")
     </div>
   </div>
 
@@ -88,10 +105,12 @@
     <div class="form-group col-4">
       @Html.LabelFor(model => model.PartitaIVA, "Partita IVA")
       @Html.EditorFor(model => model.PartitaIVA, new { htmlAttributes = new { @class = "form-control" } })
+      @Html.ValidationMessageFor(model => model.PartitaIVA, "")
     </div>
     <div class="form-group col-4">
       @Html.LabelFor(model => model.CodiceFiscale, "Codice fiscale")
       @Html.EditorFor(model => model.CodiceFiscale, new { htmlAttributes = new { @class = "form-control" } })
+      @Html.ValidationMessageFor(model => model.CodiceFiscale, "")
     </div>
   </div>
 
@@ -101,8 +120,8 @@
 }
 
 <script>
-  $('#submit_button').click(e => {
-    // detect validation stuff
+  $('#azienda_form').submit(e => {
+    e.preventDefault();
 
     $.ajax({
       url: editingAzienda ? '/Azienda/EditAzienda' : '/Azienda/SaveAzienda',
