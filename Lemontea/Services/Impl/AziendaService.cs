@@ -53,18 +53,18 @@ namespace Lemontea.Services.Impl
       var azienda = await dbContext.Aziende.FindAsync(aziendaDto.Id);
 
       azienda.RagioneSociale = aziendaDto.RagioneSociale;
-      azienda.Indirizzo = aziendaDto.Indirizzo;
-      azienda.NCivico = aziendaDto.NCivico;
-      azienda.CAP = aziendaDto.CAP;
-      azienda.Nazione = aziendaDto.Nazione;
-      azienda.Provincia = aziendaDto.Provincia;
-      azienda.Citta = aziendaDto.Citta;
-      azienda.Telefono = aziendaDto.Telefono;
-      azienda.Fax = aziendaDto.Fax;
-      azienda.Email = aziendaDto.Email;
-      azienda.SitoWeb = aziendaDto.SitoWeb;
-      azienda.PartitaIVA = aziendaDto.PartitaIVA;
-      azienda.CodiceFiscale = aziendaDto.CodiceFiscale;
+      azienda.Indirizzo      = aziendaDto.Indirizzo;
+      azienda.NCivico        = aziendaDto.NCivico;
+      azienda.CAP            = aziendaDto.CAP;
+      azienda.Nazione        = aziendaDto.Nazione;
+      azienda.Provincia      = aziendaDto.Provincia;
+      azienda.Citta          = aziendaDto.Citta;
+      azienda.Telefono       = aziendaDto.Telefono;
+      azienda.Fax            = aziendaDto.Fax;
+      azienda.Email          = aziendaDto.Email;
+      azienda.SitoWeb        = aziendaDto.SitoWeb;
+      azienda.PartitaIVA     = aziendaDto.PartitaIVA;
+      azienda.CodiceFiscale  = aziendaDto.CodiceFiscale;
 
       await dbContext.SaveChangesAsync();
 
