@@ -36,5 +36,10 @@ namespace Lemontea.Client.Services.Impl
     {
       return await lemonteaApi.Edit(aziendaDto);
     }
+
+    public async Task RemoveAsync(int id)
+    {
+      await lemonteaApi.Remove(id);
+    }
   }
 }

@@ -1,10 +1,32 @@
 ﻿@model List<Azienda>
+
+<a asp-area="" asp-controller="Azienda" asp-action="AddAzienda">Add...</a>
+
 <ul class="list-group">
-  <a asp-area="" asp-controller="Azienda" asp-action="AddAzienda">Add...</a>
-  @foreach (Azienda a in Model)
+  @if (Model != null)
   {
-    <li class="list-group-item">
-      <a asp-area="" asp-controller="Azienda" asp-action="AddAzienda" asp-route-id="@a.Id">@a.RagioneSociale</a>
-    </li>
+    @foreach (Azienda a in Model)
+    {
+      <li class="list-group-item">
+        <a asp-area="" asp-controller="Azienda" asp-action="AddAzienda" asp-route-id="@a.Id">@a.RagioneSociale</a>
+        <button type="button" class="btn btn-danger azienda-delete-btn" id="azienda_delete_@a.Id">X</button>
+      </li>
+    }
   }
 </ul>
+
+<script>
+  $('.azienda-delete-btn').click(function () {
+    $.ajax({
+      url: '/Azienda/RemoveAzienda',
+      method: 'DELETE',
+      data: {
+        id: $(this).attr('id').split('_')[2]
+      },
+      success: () => {
+        window.location = '/Azienda/Index';
+      }
+    });
+  });
+</script>
+

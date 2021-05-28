@@ -20,12 +20,14 @@ namespace Lemontea.Client.Controllers
       this.logger = logger;
     }
 
+    [HttpGet]
     public async Task<IActionResult> Index()
     {
       var aziende = await aziendaService.GetAsync();
       return View(aziende);
     }
 
+    [HttpGet]
     public async Task<IActionResult> AddAzienda(int id)
     {
       if (id == 0)
@@ -37,16 +39,37 @@ namespace Lemontea.Client.Controllers
       return View(azienda);
     }
 
+    [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> SaveAzienda(AziendaDto aziendaDto)
     {
+      if (!ModelState.IsValid)
+      {
+        return View("AddAzienda");
+      }
+
       await aziendaService.SaveAsync(aziendaDto);
-      return RedirectToAction("Index");
+      return View(nameof(Index));
     }
 
+    [HttpPut]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> EditAzienda(AziendaDto aziendaDto)
     {
+      if (!ModelState.IsValid)
+      {
+        return View("AddAzienda", aziendaDto.Id);
+      }
+
       await aziendaService.EditAsync(aziendaDto);
-      return RedirectToAction("Index");
+      return View(nameof(Index));
+    }
+
+    [HttpDelete]
+    public async Task<IActionResult> RemoveAzienda(int id)
+    {
+      await aziendaService.RemoveAsync(id);
+      return View(nameof(Index));
     }
   }
 }

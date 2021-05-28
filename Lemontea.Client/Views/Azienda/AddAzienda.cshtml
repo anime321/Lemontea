@@ -1,20 +1,15 @@
 ﻿@model Azienda 
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
-}
-
 <div>
   @Html.ActionLink("Back", "Index")
 </div>
 
-@using (Html.BeginForm("SaveAzienda", "Azienda", FormMethod.Post, new { id = "azienda_form" } ))
+@* we use ajax and call preventDefault() on the form's event so the following action params are unnecessary*@
+@using (Html.BeginForm(Model != null ? "EditAzienda" : "SaveAzienda", "Azienda", FormMethod.Post, new { id = "azienda_form" } ))
 {
   @Html.AntiForgeryToken()
 
-  @Html.HiddenFor(model => model.Id);
-
-  @Html.ValidationSummary(true, "")
+  @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
   @if (Model != null && Model.Id != 0)
   {
@@ -22,8 +17,7 @@
       var editingAzienda = true;
     </script>
 
-    // // use an extension loaded in Startup.cs
-    // @Html.HttpMethodOverride(4); //HttpVerbs.Put)
+    @Html.HiddenFor(model => model.Id);
   }
   else
   {
@@ -35,24 +29,24 @@
   <div class="form-group" row col>
     @Html.LabelFor(model => model.RagioneSociale, "Ragione sociale")
     @Html.EditorFor(model => model.RagioneSociale, new { htmlAttributes = new { @class = "form-control" } })
-    @Html.ValidationMessageFor(model => model.RagioneSociale, "")
+    @Html.ValidationMessageFor(model => model.RagioneSociale, "", new { @class = "text-danger" })
   </div>
 
   <div class="row">
     <div class="form-group col-8">
       @Html.LabelFor(model => model.Indirizzo, "Indirizzo")
       @Html.EditorFor(model => model.Indirizzo, new { htmlAttributes = new { @class = "form-control" } })
-      @Html.ValidationMessageFor(model => model.Indirizzo, "")
+      @Html.ValidationMessageFor(model => model.Indirizzo, "", new { @class = "text-danger" })
     </div>
     <div class="form-group col-2">
       @Html.LabelFor(model => model.NCivico, "N° civico")
       @Html.EditorFor(model => model.NCivico, new { htmlAttributes = new { @class = "form-control" } })
-      @Html.ValidationMessageFor(model => model.NCivico, "")
+      @Html.ValidationMessageFor(model => model.NCivico, "", new { @class = "text-danger" })
     </div>
     <div class="form-group col-2">
       @Html.LabelFor(model => model.CAP, "CAP")
       @Html.EditorFor(model => model.CAP, new { htmlAttributes = new { @class = "form-control" } })
-      @Html.ValidationMessageFor(model => model.CAP, "")
+      @Html.ValidationMessageFor(model => model.CAP, "", new { @class = "text-danger" })
     </div>
   </div>
 
@@ -60,17 +54,17 @@
     <div class="form-group col">
       @Html.LabelFor(model => model.Nazione, "Nazione")
       @Html.EditorFor(model => model.Nazione, new { htmlAttributes = new { @class = "form-control" } })
-      @Html.ValidationMessageFor(model => model.Nazione, "")
+      @Html.ValidationMessageFor(model => model.Nazione, "", new { @class = "text-danger" })
     </div>
     <div class="form-group col">
       @Html.LabelFor(model => model.Provincia, "Provincia")
       @Html.EditorFor(model => model.Provincia, new { htmlAttributes = new { @class = "form-control" } })
-      @Html.ValidationMessageFor(model => model.Provincia, "")
+      @Html.ValidationMessageFor(model => model.Provincia, "", new { @class = "text-danger" })
     </div>
     <div class="form-group col">
       @Html.LabelFor(model => model.Citta, "Città")
       @Html.EditorFor(model => model.Citta, new { htmlAttributes = new { @class = "form-control" } })
-      @Html.ValidationMessageFor(model => model.Citta, "")
+      @Html.ValidationMessageFor(model => model.Citta, "", new { @class = "text-danger" })
     </div>
   </div>
 
@@ -78,17 +72,17 @@
     <div class="form-group col">
       @Html.LabelFor(model => model.Telefono, "Telefono")
       @Html.EditorFor(model => model.Telefono, new { htmlAttributes = new { @class = "form-control" } })
-      @Html.ValidationMessageFor(model => model.Telefono, "")
+      @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
     </div>
     <div class="form-group col">
       @Html.LabelFor(model => model.Fax, "Fax")
       @Html.EditorFor(model => model.Fax, new { htmlAttributes = new { @class = "form-control" } })
-      @Html.ValidationMessageFor(model => model.Fax, "")
+      @Html.ValidationMessageFor(model => model.Fax, "", new { @class = "text-danger" })
     </div>
     <div class="form-group col">
       @Html.LabelFor(model => model.Email, "Email aziendale")
       @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-      @Html.ValidationMessageFor(model => model.Email, "")
+      @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
     </div>
   </div>
 
@@ -96,7 +90,7 @@
     <div class="form-group col-4">
       @Html.LabelFor(model => model.SitoWeb, "Sito Web")
       @Html.EditorFor(model => model.SitoWeb, new { htmlAttributes = new { @class = "form-control" } })
-      @Html.ValidationMessageFor(model => model.SitoWeb, "")
+      @Html.ValidationMessageFor(model => model.SitoWeb, "", new { @class = "text-danger" })
     </div>
   </div>
 
@@ -105,12 +99,12 @@
     <div class="form-group col-4">
       @Html.LabelFor(model => model.PartitaIVA, "Partita IVA")
       @Html.EditorFor(model => model.PartitaIVA, new { htmlAttributes = new { @class = "form-control" } })
-      @Html.ValidationMessageFor(model => model.PartitaIVA, "")
+      @Html.ValidationMessageFor(model => model.PartitaIVA, "", new { @class = "text-danger" })
     </div>
     <div class="form-group col-4">
       @Html.LabelFor(model => model.CodiceFiscale, "Codice fiscale")
       @Html.EditorFor(model => model.CodiceFiscale, new { htmlAttributes = new { @class = "form-control" } })
-      @Html.ValidationMessageFor(model => model.CodiceFiscale, "")
+      @Html.ValidationMessageFor(model => model.CodiceFiscale, "", new { @class = "text-danger" })
     </div>
   </div>
 
@@ -119,18 +113,27 @@
   </div>
 }
 
-<script>
-  $('#azienda_form').submit(e => {
-    e.preventDefault();
+@section Scripts {
+  @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 
-    $.ajax({
-      url: editingAzienda ? '/Azienda/EditAzienda' : '/Azienda/SaveAzienda',
-      method: editingAzienda ? 'PUT' : 'POST',
-      data: $('#azienda_form').serialize(),
-      success: data => {
-        console.log('submitted!');
-      }
+  <script>
+    $('#azienda_form').submit(e => {
+      e.preventDefault();
+
+      // check all form data for validity before making any calls
+      if (!$('#azienda_form').valid())
+        return;
+
+      $.ajax({
+        url: editingAzienda ? '/Azienda/EditAzienda' : '/Azienda/SaveAzienda',
+        method: editingAzienda ? 'PUT' : 'POST',
+        data: $('#azienda_form').serialize(),
+        success: data => {
+          window.location = '/Azienda/Index';
+        }
+      });
     });
-  });
-</script>
+  </script>
+}
+
 

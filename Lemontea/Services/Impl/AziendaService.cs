@@ -70,5 +70,15 @@ namespace Lemontea.Services.Impl
 
       return OperationResult.Ok(azienda);
     }
+
+    public async Task<OperationResult> RemoveAsync(int id)
+    {
+      var azienda = await dbContext.Aziende.FindAsync(id);
+      dbContext.Aziende.Remove(azienda);
+
+      await dbContext.SaveChangesAsync();
+
+      return OperationResult.Ok();
+    }
   }
 }

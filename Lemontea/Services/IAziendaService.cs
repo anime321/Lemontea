@@ -13,5 +13,6 @@ namespace Lemontea.Services
     Task<OperationResult> GetByIdAsync(int id);
     Task<OperationResult> SaveAsync(AziendaDto aziendaDto);
     Task<OperationResult> EditAsync(AziendaDto aziendaDto);
+    Task<OperationResult> RemoveAsync(int id);
   }
 }

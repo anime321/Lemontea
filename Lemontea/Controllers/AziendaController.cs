@@ -56,5 +56,14 @@ namespace Lemontea.Controllers
 
       return response;
     }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Remove(int id)
+    {
+      var result = await aziendaService.RemoveAsync(id);
+      var response = CreateResponse(result);
+
+      return response;
+    }
   }
 }

@@ -12,6 +12,6 @@
     [Fax] NVARCHAR(50) NULL, 
     [Email] NVARCHAR(50) NOT NULL, 
     [SitoWeb] NVARCHAR(50) NULL, 
-    [PartitaIVA] NVARCHAR(50) NOT NULL, 
-    [CodiceFiscale] NVARCHAR(50) NULL
+    [PartitaIVA] NVARCHAR(11) NOT NULL, 
+    [CodiceFiscale] NVARCHAR(16) NULL
 )

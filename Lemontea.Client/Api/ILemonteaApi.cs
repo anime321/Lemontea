@@ -21,5 +21,8 @@ namespace Lemontea.Client.Api
 
     [Put("/azienda")]
     Task<Azienda> Edit(AziendaDto aziendaDto);
+
+    [Delete("/azienda/{id}")]
+    Task Remove(int id);
   }
 }

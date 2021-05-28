@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lemontea.Client", "Lemontea
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Lemontea.Database", "Lemontea.Database\Lemontea.Database.sqlproj", "{BFAB47C1-5BB9-4A7B-AA43-BDB0FD2634CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lemontea.Shared", "Lemontea.Shared\Lemontea.Shared.csproj", "{5A94BD12-AD11-440F-8718-89EACC0BCD55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lemontea.Shared", "Lemontea.Shared\Lemontea.Shared.csproj", "{5A94BD12-AD11-440F-8718-89EACC0BCD55}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
