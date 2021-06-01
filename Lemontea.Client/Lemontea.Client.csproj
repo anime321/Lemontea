@@ -7,7 +7,9 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.6" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
     <PackageReference Include="Refit.HttpClientFactory" Version="6.0.38" />
+    <PackageReference Include="Telerik.UI.for.AspNet.Core.Trial" Version="2021.2.511" />
   </ItemGroup>
 
   <ItemGroup>

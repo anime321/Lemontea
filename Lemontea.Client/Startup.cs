@@ -37,6 +37,8 @@ namespace Lemontea.Client
 
       services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
+      services.AddKendo();
+
       services.AddRefitClient<ILemonteaApi>()
         .ConfigureHttpClient(c => c.BaseAddress = new Uri(appSettings.LemonteaApiBaseUrl));
 

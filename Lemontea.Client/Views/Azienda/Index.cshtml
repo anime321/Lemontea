@@ -1,15 +1,19 @@
 ﻿@model List<Azienda>
 
 <a asp-area="" asp-controller="Azienda" asp-action="AddAzienda">Add...</a>
+<a asp-area="" asp-controller="Azienda" asp-action="Search">Search...</a>
 
 <ul class="list-group">
   @if (Model != null)
   {
     @foreach (Azienda a in Model)
     {
-      <li class="list-group-item">
+      <li class="list-group-item align-items-center">
         <a asp-area="" asp-controller="Azienda" asp-action="AddAzienda" asp-route-id="@a.Id">@a.RagioneSociale</a>
-        <button type="button" class="btn btn-danger azienda-delete-btn" id="azienda_delete_@a.Id">X</button>
+
+        <button type="button" class="btn btn-danger azienda-delete-btn" id="azienda_delete_@a.Id">
+          Elimina
+        </button>
       </li>
     }
   }

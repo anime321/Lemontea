@@ -71,5 +71,19 @@ namespace Lemontea.Client.Controllers
       await aziendaService.RemoveAsync(id);
       return View(nameof(Index));
     }
+
+    [HttpGet]
+    public async Task<IActionResult> Search()
+    {
+      var aziende = await aziendaService.GetAsync();
+      return View(aziende);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> SearchAzienda(string ragioneSocialePattern, string codiceFiscalePattern)
+    {
+      var aziende = await aziendaService.SearchAsync(ragioneSocialePattern, codiceFiscalePattern);
+      return PartialView("_SearchResults", aziende);
+    }
   }
 }

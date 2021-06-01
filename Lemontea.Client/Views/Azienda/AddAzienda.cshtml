@@ -52,9 +52,23 @@
 
   <div class="row">
     <div class="form-group col">
-      @Html.LabelFor(model => model.Nazione, "Nazione")
-      @Html.EditorFor(model => model.Nazione, new { htmlAttributes = new { @class = "form-control" } })
-      @Html.ValidationMessageFor(model => model.Nazione, "", new { @class = "text-danger" })
+      @*@Html.LabelFor(model => model.Nazione, "Nazione")
+    @Html.EditorFor(model => model.Nazione, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.Nazione, "", new { @class = "text-danger" })*@
+
+      (@Html.Kendo().DropDownList().Name("Nazione").DataSource(source =>
+ {
+   source.
+     Custom()
+     .Transport(transport => transport
+       .Read(read =>
+       {
+         read.Url()
+       })
+     )
+     })
+      )
+
     </div>
     <div class="form-group col">
       @Html.LabelFor(model => model.Provincia, "Provincia")

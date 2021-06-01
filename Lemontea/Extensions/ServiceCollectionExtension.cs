@@ -15,12 +15,15 @@ namespace Lemontea.Extensions
     {
       Type[] profileTypeArray = new Type[]
       {
-        typeof(AziendaProfile)
+        typeof(AziendaProfile),
+        typeof(CountryProfile),
+        typeof(StateProfile)
       };
 
       services.AddAutoMapper(profileTypeArray);
 
       services.AddScoped<IAziendaService, AziendaService>();
+      services.AddScoped<ICountryService, CountryService>();
     }
   }
 }

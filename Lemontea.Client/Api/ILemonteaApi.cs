@@ -11,18 +11,22 @@ namespace Lemontea.Client.Api
   public interface ILemonteaApi
   {
     [Get("/azienda")]
-    Task<List<Azienda>> Get();
+    Task<List<Azienda>> GetAziende();
 
     [Get("/azienda/{id}")]
-    Task<Azienda> GetById(int id);
+    Task<Azienda> GetAziendaById(int id);
 
     [Post("/azienda")]
-    Task<Azienda> Save(AziendaDto aziendaDto);
+    Task<Azienda> SaveAzienda(AziendaDto aziendaDto);
 
     [Put("/azienda")]
-    Task<Azienda> Edit(AziendaDto aziendaDto);
+    Task<Azienda> EditAzienda(AziendaDto aziendaDto);
 
     [Delete("/azienda/{id}")]
-    Task Remove(int id);
+    Task RemoveAzienda(int id);
+
+
+    [Get("/country")]
+    Task<List<Country>> GetCountries();
   }
 }
