@@ -43,6 +43,7 @@ namespace Lemontea.Client
         .ConfigureHttpClient(c => c.BaseAddress = new Uri(appSettings.LemonteaApiBaseUrl));
 
       services.AddScoped<IAziendaService, AziendaService>();
+      services.AddScoped<ICountryService, CountryService>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

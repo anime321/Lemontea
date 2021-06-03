@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Lemontea.Client.Services.Impl
 {
-  public class CountryService
+  public class CountryService : ICountryService
   {
     private readonly ILemonteaApi lemonteaApi;
 
@@ -15,7 +15,7 @@ namespace Lemontea.Client.Services.Impl
     {
       this.lemonteaApi = lemonteaApi;
     }
-    
+
     public async Task<List<Country>> GetAsync()
     {
       return await lemonteaApi.GetCountries();

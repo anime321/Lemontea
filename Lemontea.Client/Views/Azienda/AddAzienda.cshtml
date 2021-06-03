@@ -1,11 +1,11 @@
-﻿@model Azienda 
+﻿@model Azienda
 
 <div>
   @Html.ActionLink("Back", "Index")
 </div>
 
 @* we use ajax and call preventDefault() on the form's event so the following action params are unnecessary*@
-@using (Html.BeginForm(Model != null ? "EditAzienda" : "SaveAzienda", "Azienda", FormMethod.Post, new { id = "azienda_form" } ))
+@using (Html.BeginForm(Model != null ? "EditAzienda" : "SaveAzienda", "Azienda", FormMethod.Post, new { id = "azienda_form" }))
 {
   @Html.AntiForgeryToken()
 
@@ -52,21 +52,20 @@
 
   <div class="row">
     <div class="form-group col">
-      @*@Html.LabelFor(model => model.Nazione, "Nazione")
-    @Html.EditorFor(model => model.Nazione, new { htmlAttributes = new { @class = "form-control" } })
-    @Html.ValidationMessageFor(model => model.Nazione, "", new { @class = "text-danger" })*@
 
-      (@Html.Kendo().DropDownList().Name("Nazione").DataSource(source =>
- {
-   source.
-     Custom()
-     .Transport(transport => transport
-       .Read(read =>
-       {
-         read.Url()
-       })
-     )
-     })
+      @(Html.Kendo().DropDownList()
+        .Name("Nazione")
+        .DataTextField("countryName")
+        .DataValueField("alpha2Code")
+        .Value(Model != null ? Model.Nazione : "")
+        .DataSource(source =>
+        {
+          source.Read(read =>
+          {
+            read.Action("Get", "Country");
+          })
+          .ServerFiltering(false);
+        })
       )
 
     </div>
@@ -84,9 +83,28 @@
 
   <div class="row">
     <div class="form-group col">
-      @Html.LabelFor(model => model.Telefono, "Telefono")
-      @Html.EditorFor(model => model.Telefono, new { htmlAttributes = new { @class = "form-control" } })
-      @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
+
+      @(Html.Kendo().MultiColumnComboBox()
+          .Name("Telefono")
+          .Placeholder("Telefono")
+          .DataTextField("phoneCode")
+          .DataValueField("alpha2Code")
+          .Value(Model != null ? Model.Telefono : "")
+          .DropDownWidth("100px")
+          .Columns(columns =>
+          {
+            columns.Add().Field("phoneCode").Title("Phone Code").Width("100px");
+          })
+          .DataSource(source =>
+          {
+            source.Read(read =>
+            {
+              read.Action("Get", "Country");
+            })
+            .ServerFiltering(false);
+          })
+      )
+
     </div>
     <div class="form-group col">
       @Html.LabelFor(model => model.Fax, "Fax")

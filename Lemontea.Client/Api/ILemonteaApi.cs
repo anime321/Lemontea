@@ -25,7 +25,6 @@ namespace Lemontea.Client.Api
     [Delete("/azienda/{id}")]
     Task RemoveAzienda(int id);
 
-
     [Get("/country")]
     Task<List<Country>> GetCountries();
   }

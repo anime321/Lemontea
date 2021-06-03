@@ -1,37 +1,41 @@
 ﻿@model List<Azienda>
 
-@using (Html.BeginForm("SearchAzienda", "Azienda", FormMethod.Get, new { @class = "form-inline row", id = "search_form_id" }))
-{
-  <input type="text" name="ragioneSocialePattern" class="form-control col-4" id="ragionesociale_input" placeholder="Ragione sociale" />
-  <input type="text" name="codiceFiscalePattern" class="form-control col-4" id="codicefiscale_input" placeholder="Codice fiscale" />
+  <div>
 
-  <span class="col-3"></span>
-  <button type="submit" class="btn btn-primary col-1">Cerca</button>
-}
-
-<ul class="list-group" id="azienda_search_results">
-  @if (Model != null)
-  {
-    // init the list
-    foreach (Azienda a in Model)
+    @using (Html.BeginForm("SearchAzienda", "Azienda", FormMethod.Get, new { @class = "form-inline row", id = "search_form_id" }))
     {
-      <li class="list-group-item">@a.RagioneSociale, @a.CodiceFiscale</li>
-    }
-  }
-</ul>
+      <input type="text" name="ragioneSocialePattern" class="form-control col-4" id="ragionesociale_input" placeholder="Ragione sociale" />
+      <input type="text" name="codiceFiscalePattern" class="form-control col-4" id="codicefiscale_input" placeholder="Codice fiscale" />
 
-<script>
-  $('#search_form_id').submit(function(e) {
-    e.preventDefault();
-   
-    $.ajax({
-      url: "/Azienda/SearchAzienda",
-      method: 'GET',
-      data: $('#search_form_id').serialize(),
-      success: data => {
-        // destroy initial data and render the partial view
-        $('#azienda_search_results').html(data);
+      <span class="col-3"></span>
+      <button type="submit" class="btn btn-primary col-1">Cerca</button>
+    }
+
+    <ul class="list-group" id="azienda_search_results" style="margin-top: 5px; margin-bottom:5px">
+      @if (Model != null)
+      {
+        // init the list
+        foreach (Azienda a in Model)
+        {
+          <li class="list-group-item">@a.RagioneSociale, @a.CodiceFiscale</li>
+        }
       }
-    })
-  });
-</script>
+    </ul>
+
+  </div>
+
+  <script>
+    $('#search_form_id').submit(function (e) {
+      e.preventDefault();
+
+      $.ajax({
+        url: "/Azienda/SearchAzienda",
+        method: 'GET',
+        data: $('#search_form_id').serialize(),
+        success: data => {
+          // render the partial view
+          $('#azienda_search_results').html(data);
+        }
+      })
+    });
+  </script>
