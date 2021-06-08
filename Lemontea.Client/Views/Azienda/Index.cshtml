@@ -1,36 +1,72 @@
 ﻿@model List<Azienda>
 
-<a asp-area="" asp-controller="Azienda" asp-action="AddAzienda">Add...</a>
-<a asp-area="" asp-controller="Azienda" asp-action="Search">Search...</a>
-
-<ul class="list-group">
-  @if (Model != null)
+<div style="margin-top: 10px; margin-bottom: 10px;">
+  @(Html.Kendo().Button()
+  .Name("addAziendaButton")
+  .Content("Aggiungi")
+  .Events(config =>
   {
-    @foreach (Azienda a in Model)
-    {
-      <li class="list-group-item align-items-center">
-        <a asp-area="" asp-controller="Azienda" asp-action="AddAzienda" asp-route-id="@a.Id">@a.RagioneSociale</a>
+    config.Click("goToAddAzienda");
+  })
+)
+  @(Html.Kendo().Button()
+  .Name("searchAziendaButton")
+  .Content("Cerca")
+  .Events(config =>
+  {
+    config.Click("goToSearchAzienda");
+  })
+)
+</div>
 
-        <button type="button" class="btn btn-danger azienda-delete-btn" id="azienda_delete_@a.Id">
-          Elimina
-        </button>
-      </li>
-    }
-  }
-</ul>
+@(Html.Kendo().Grid<Azienda>(Model)
+  .Name("GridAziende")
+  .Columns(columns =>
+  {
+    columns.Bound(m => m.RagioneSociale);
+    columns.Bound(m => m.Telefono);
+    columns.Bound(m => m.SitoWeb);
+    columns.Bound(m => m.Email);
+    columns.Command(command => command.Custom("EditAzienda").Text("Modifica").Click("editAziendaRedirect")).Width(120);
+    columns.Command(command => command.Destroy().Text("Elimina")).Width(120);
+  })
+  .ToolBar(toolbar =>
+  {
+    toolbar.Search();
+  })
+  .Sortable(true)
+  .DataSource(source =>
+  {
+    source
+      .Ajax()
+      .ServerOperation(false)
+      .Model(m =>
+      {
+        m.Id(a => a.Id);
+        m.Field(a => a.RagioneSociale);
+        m.Field(a => a.Telefono);
+        m.Field(a => a.SitoWeb);
+        m.Field(a => a.Email);
+      })
+      .Destroy(config =>
+      {
+        config.Action("RemoveAzienda", "Azienda");
+        config.Type(HttpVerbs.Delete);
+      });
+  })
+)
 
 <script>
-  $('.azienda-delete-btn').click(function () {
-    $.ajax({
-      url: '/Azienda/RemoveAzienda',
-      method: 'DELETE',
-      data: {
-        id: $(this).attr('id').split('_')[2]
-      },
-      success: () => {
-        window.location = '/Azienda/Index';
-      }
-    });
-  });
-</script>
+  function editAziendaRedirect(e) {
+    let d = this.dataItem($(e.currentTarget).closest('tr'));
+    window.location.href = "@Url.Action("AddAzienda", "Azienda")?id=" + d.Id;
+  }
 
+  function goToAddAzienda(e) {
+    window.location.href = "@Url.Action("AddAzienda", "Azienda")";
+  }
+
+  function goToSearchAzienda(e) {
+    window.location.href = "@Url.Action("Search", "Azienda")";
+  }
+</script>

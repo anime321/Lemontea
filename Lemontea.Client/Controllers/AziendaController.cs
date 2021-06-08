@@ -66,9 +66,9 @@ namespace Lemontea.Client.Controllers
     }
 
     [HttpDelete]
-    public async Task<IActionResult> RemoveAzienda(int id)
+    public async Task<IActionResult> RemoveAzienda(AziendaDto aziendaDto)
     {
-      await aziendaService.RemoveAsync(id);
+      await aziendaService.RemoveAsync(aziendaDto.Id);
       return View(nameof(Index));
     }
 

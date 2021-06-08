@@ -23,7 +23,7 @@ namespace Lemontea.Services.Impl
 
     public async Task<OperationResult> GetAsync()
     {
-      var countries = await dbContext.Countries.ToListAsync();
+      var countries = await dbContext.Countries.Where(c => c.Language == "IT").ToListAsync();
       var countriesDto = mapper.Map<List<Country>, List<CountryDto>>(countries);
 
       return OperationResult.Ok(countriesDto);

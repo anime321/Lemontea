@@ -21,10 +21,17 @@ namespace Lemontea.Client.Controllers
     }
 
     [HttpGet]
-    public async Task<IActionResult> Get()
+    public async Task<IActionResult> Get_Countries()
     {
       var countries = await countryService.GetAsync();
       return Ok(countries);
     }
+
+    //[HttpGet]
+    //public async Task<IActionResult> Get_StatesByCountry(int alpha2Code)
+    //{
+    //  var countries = await countryService.GetAsync();
+    //  return Ok(countries);
+    //}
   }
 }

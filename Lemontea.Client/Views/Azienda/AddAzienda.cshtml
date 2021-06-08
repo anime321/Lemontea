@@ -1,8 +1,25 @@
 ﻿@model Azienda
 
-<div>
-  @Html.ActionLink("Back", "Index")
+<div style="margin-top: 10px; margin-bottom: 10px">
+  @(Html.Kendo().Button()
+  .Name("goBackButton")
+  .Content("Indietro")
+  .Events(config =>
+  {
+    config.Click("goToIndex");
+  })
+  )
 </div>
+
+<script>
+  function getSelectedCountry() {
+    return $("#Nazione").val();
+  }
+
+  function goToIndex(e) {
+    window.location.href = "@Url.Action("Index", "Azienda")";
+  }
+</script>
 
 @* we use ajax and call preventDefault() on the form's event so the following action params are unnecessary*@
 @using (Html.BeginForm(Model != null ? "EditAzienda" : "SaveAzienda", "Azienda", FormMethod.Post, new { id = "azienda_form" }))
@@ -53,16 +70,16 @@
   <div class="row">
     <div class="form-group col">
 
-      @(Html.Kendo().DropDownList()
-        .Name("Nazione")
+      @(Html.Kendo().DropDownListFor(m => m.Nazione)
+        //.Name("Nazione")
         .DataTextField("countryName")
         .DataValueField("alpha2Code")
-        .Value(Model != null ? Model.Nazione : "")
+        //.Value(Model != null ? Model.Nazione : "")
         .DataSource(source =>
         {
           source.Read(read =>
           {
-            read.Action("Get", "Country");
+            read.Action("Get_Countries", "Country");
           })
           .ServerFiltering(false);
         })
@@ -70,9 +87,26 @@
 
     </div>
     <div class="form-group col">
-      @Html.LabelFor(model => model.Provincia, "Provincia")
-      @Html.EditorFor(model => model.Provincia, new { htmlAttributes = new { @class = "form-control" } })
-      @Html.ValidationMessageFor(model => model.Provincia, "", new { @class = "text-danger" })
+      @*@Html.LabelFor(model => model.Provincia, "Provincia")
+        @Html.EditorFor(model => model.Provincia, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Provincia, "", new { @class = "text-danger" })*@
+      @(Html.Kendo().DropDownListFor(m => m.Provincia)
+        //.Name("Provincia")
+        .DataTextField("stateName")
+        .DataValueField("alpha2Code")
+        //.Value(Model != null ? Model.Provincia : "")
+        .DataSource(source =>
+        {
+          source.Read(read =>
+          {
+            read.Action("Get_StatesByCountry", "Country").Data("getSelectedCountry");
+          })
+          .ServerFiltering(false);
+        })
+        .Enable(false)
+        .AutoBind(false)
+        .CascadeFrom("Nazione")
+      )
     </div>
     <div class="form-group col">
       @Html.LabelFor(model => model.Citta, "Città")
@@ -93,13 +127,13 @@
           .DropDownWidth("100px")
           .Columns(columns =>
           {
-            columns.Add().Field("phoneCode").Title("Phone Code").Width("100px");
+            columns.Add().Field("phoneCode").Title("Phone code").Width("100px");
           })
           .DataSource(source =>
           {
             source.Read(read =>
             {
-              read.Action("Get", "Country");
+              read.Action("Get_Countries", "Country");
             })
             .ServerFiltering(false);
           })
@@ -146,9 +180,17 @@
 }
 
 @section Scripts {
-  @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+  @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
   <script>
+    function getSelectedCountry() {
+      return $("#Nazione").val();
+    }
+
+    //$("#Nazione").change(e => {
+    //  $("#Provincia").data('kendoDropDownList').refresh();
+    //});
+
     $('#azienda_form').submit(e => {
       e.preventDefault();
 

@@ -46,6 +46,10 @@ namespace Lemontea.Client.Services.Impl
     {
       var aziende = await lemonteaApi.GetAziende();
 
+      //
+      // TODO: move logic to API project and use dbcontext
+      //
+
       bool rsCheck = false;
       bool cfCheck = false;
 
@@ -63,7 +67,7 @@ namespace Lemontea.Client.Services.Impl
         cfCheck = true;
       }
 
-      Func<Azienda, bool> whereLambda = azienda =>
+      Func<Azienda, bool> whereLambdaChecks = azienda =>
       {
         if (rsCheck && cfCheck)
         {
@@ -82,7 +86,7 @@ namespace Lemontea.Client.Services.Impl
         return false;
       };
 
-      var result = aziende.Where(whereLambda).ToList();
+      var result = aziende.Where(whereLambdaChecks).ToList();
 
       return result;
     }
