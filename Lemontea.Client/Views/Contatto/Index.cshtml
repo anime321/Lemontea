@@ -1,0 +1,124 @@
+﻿@model List<Contatto>
+
+<div style="margin-top: 10px; margin-bottom: 10px">
+  @(Html.Kendo().Button()
+  .Name("addContattoButton")
+  .Content("Aggiungi contatto")
+  .Events(config =>
+  {
+    config.Click("showEditModal");
+  })
+  )
+</div>
+
+@if (Model.Count == 0)
+{
+  <h5>Nessun contato trovato</h5>
+}
+else
+{
+  @foreach (var contatto in Model)
+  {
+    <div class="card" style="width: 18rem">
+
+      <div class="card-header">
+        <div class="float-right">
+
+          <div class="dropdown">
+            <button class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+                <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+              </svg>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <div class="dropdown-item di-edit" data-toggle="modal" data-target="#edit_modal" data-id="@contatto.Id">Modifica</div>
+              <div class="dropdown-item di-delete" data-toggle="modal" data-target="#delete_modal" data-id="@contatto.Id" href="#">Elimina</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="card-body">
+
+        <h6 class="card-title">
+          @contatto.Nome @contatto.Cognome
+        </h6>
+
+        <p class="card-title">@contatto.Email</p>
+        <p class="card-text">@contatto.Telefono</p>
+        <p class="card-text">@contatto.Cellulare</p>
+
+      </div>
+    </div>
+  }
+}
+
+<div id="edit_modal_main">
+</div>
+
+<div id="delete_modal" class="modal" tabindex="-1" role="alertdialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title">Elimina contatto</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" />
+      </div>
+
+      <div class="modal-body">
+        Eliminare il contatto?
+      </div>
+
+      <div class="modal-footer">
+        <button id="btn_delete" type="button" class="btn btn-danger">Elimina</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  function showEditModal() {
+    $('#edit_modal').show();
+  }
+
+  // jquery stuff
+  $(document).ready(() => {
+
+    $('.di-delete').click(function (e) {
+      const id = $(this).attr('data-id');
+      $('#btn_delete').attr('data-id', id);
+    });
+
+    $('.di-edit').click(function (e) {
+      const id = $(this).attr('data-id');
+      $('#btn_edit').attr('data-id', id);
+    });
+
+  });
+
+  $('#btn_delete').click(function (e) {
+    const id = $(this).attr('data-id');
+
+    $.ajax({
+      url: '/Contatto/Remove',
+      method: 'DELETE',
+      data: {
+        id: id
+      },
+      success: data => {
+        window.location = '/Contatto/Index';
+      }
+    });
+
+  });
+
+  $('#btn_edit').click(function (e) {
+    const id = $(this).attr('data-id');
+
+  });
+
+  });
+</script>

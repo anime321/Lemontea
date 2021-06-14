@@ -13,6 +13,7 @@ namespace Lemontea
     public DbSet<Azienda> Aziende { get; set; }
     public DbSet<Country> Countries { get; set; }
     public DbSet<State> States { get; set; }
+    public DbSet<Contatto> Contatti { get; set; }
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 

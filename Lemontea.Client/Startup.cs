@@ -44,6 +44,7 @@ namespace Lemontea.Client
 
       services.AddScoped<IAziendaService, AziendaService>();
       services.AddScoped<ICountryService, CountryService>();
+      services.AddScoped<IContattoService, ContattoService>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,8 +60,6 @@ namespace Lemontea.Client
         // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
         app.UseHsts();
       }
-      //// to override form method
-      //app.UseHttpMethodOverride();
 
       app.UseHttpsRedirection();
       app.UseStaticFiles();

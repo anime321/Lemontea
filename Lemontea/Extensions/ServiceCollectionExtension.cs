@@ -17,13 +17,15 @@ namespace Lemontea.Extensions
       {
         typeof(AziendaProfile),
         typeof(CountryProfile),
-        typeof(StateProfile)
+        typeof(StateProfile),
+        typeof(ContattoProfile)
       };
 
       services.AddAutoMapper(profileTypeArray);
 
       services.AddScoped<IAziendaService, AziendaService>();
       services.AddScoped<ICountryService, CountryService>();
+      services.AddScoped<IContattoService, ContattoService>();
     }
   }
 }

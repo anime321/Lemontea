@@ -28,10 +28,27 @@ namespace Lemontea.Client.Api
     [Get("/azienda/search")]
     Task<List<Azienda>> SearchAziende(string ragioneSocialePattern, string codiceFiscalePattern);
 
+
     [Get("/country")]
     Task<List<Country>> GetCountries();
 
     [Get("/country/states")]
     Task<List<State>> GetStatesByCountry(string alpha2Code);
+
+
+    [Get("/contatto")]
+    Task<List<Contatto>> GetContatti();
+
+    [Get("/contatto/{id}")]
+    Task<Contatto> GetContattoById(int id);
+
+    [Post("/contatto")]
+    Task<Contatto> SaveContatto(ContattoDto contattoDto);
+
+    [Put("/contatto")]
+    Task<Contatto> EditContatto(ContattoDto contattoDto);
+
+    [Delete("/contatto/{id}")]
+    Task RemoveContatto(int id);
   }
 }
