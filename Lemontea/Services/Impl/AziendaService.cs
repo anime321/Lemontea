@@ -80,5 +80,43 @@ namespace Lemontea.Services.Impl
 
       return OperationResult.Ok();
     }
+
+    public async Task<OperationResult> SearchAziende(string ragioneSocialePattern, string codiceFiscalePattern)
+    {
+      List<Azienda> aziende;
+      bool rsCheck = false;
+      bool cfCheck = false;
+
+      if (!string.IsNullOrEmpty(ragioneSocialePattern))
+        rsCheck = true;
+
+      if (!string.IsNullOrEmpty(codiceFiscalePattern))
+        cfCheck = true;
+
+      if (cfCheck || rsCheck)
+      {
+        if (rsCheck && !cfCheck)
+        {
+          aziende = await dbContext.Aziende.Where(a => a.RagioneSociale.Contains(ragioneSocialePattern)).ToListAsync();
+        }
+        else if (cfCheck && !rsCheck)
+        {
+          aziende = await dbContext.Aziende.Where(a => a.CodiceFiscale.Contains(codiceFiscalePattern)).ToListAsync();
+        }
+        else
+        {
+          aziende = await dbContext.Aziende.Where(a =>
+            a.RagioneSociale.Contains(ragioneSocialePattern)
+            && a.CodiceFiscale.Contains(codiceFiscalePattern)
+            ).ToListAsync();
+        }
+      }
+      else
+      {
+        aziende = await dbContext.Aziende.ToListAsync();
+      }
+
+      return OperationResult.Ok(aziende);
+    }
   }
 }

@@ -20,5 +20,10 @@ namespace Lemontea.Client.Services.Impl
     {
       return await lemonteaApi.GetCountries();
     }
+
+    public async Task<List<State>> GetStatesByCountryAsync(string alpha2Code)
+    {
+      return await lemonteaApi.GetStatesByCountry(alpha2Code);
+    }
   }
 }

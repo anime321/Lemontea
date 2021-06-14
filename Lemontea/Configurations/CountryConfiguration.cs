@@ -14,8 +14,8 @@ namespace Lemontea.Configurations
     {
       builder.HasKey(c => new { c.Language, c.Alpha2Code });
 
-      builder.HasMany(c => c.States)
-        .WithOne();
+      //builder.HasMany(c => c.States)
+      //  .WithOne();
     }
   }
 }

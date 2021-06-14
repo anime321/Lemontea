@@ -27,11 +27,11 @@ namespace Lemontea.Client.Controllers
       return Ok(countries);
     }
 
-    //[HttpGet]
-    //public async Task<IActionResult> Get_StatesByCountry(int alpha2Code)
-    //{
-    //  var countries = await countryService.GetAsync();
-    //  return Ok(countries);
-    //}
+    [HttpGet]
+    public async Task<IActionResult> Get_StatesByCountry(string alpha2Code)
+    {
+      var states = await countryService.GetStatesByCountryAsync(alpha2Code);
+      return Ok(states);
+    }
   }
 }

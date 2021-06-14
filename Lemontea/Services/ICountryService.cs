@@ -9,5 +9,6 @@ namespace Lemontea.Services
   public interface ICountryService
   {
     Task<OperationResult> GetAsync();
+    Task<OperationResult> GetStatesByCountry(string alpha2Code);
   }
 }

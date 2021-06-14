@@ -29,5 +29,14 @@ namespace Lemontea.Controllers
 
       return response;
     }
+
+    [HttpGet("states")]
+    public async Task<IActionResult> GetStatesByCountry(string alpha2Code)
+    {
+      var result = await countryService.GetStatesByCountry(alpha2Code);
+      var response = CreateResponse(result);
+
+      return response;
+    }
   }
 }

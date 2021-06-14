@@ -25,6 +25,6 @@ namespace Lemontea.Entities
 
     public string PhoneCode { get; set; }
 
-    public List<State> States { get; set; }
+    //public List<State> States { get; set; }
   }
 }

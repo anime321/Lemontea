@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lemontea.Entities
 {
+  [Table("States")]
   public class State
   {
     public string CountryAlpha2Code { get; set; }
@@ -13,5 +14,7 @@ namespace Lemontea.Entities
 
     [Column("State")]
     public string StateName { get; set; }
+
+    //public Country Country { get; set; }
   }
 }

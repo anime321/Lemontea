@@ -65,5 +65,14 @@ namespace Lemontea.Controllers
 
       return response;
     }
+
+    [HttpGet("search")]
+    public async Task<IActionResult> Search(string ragioneSocialePattern, string codiceFiscalePattern)
+    {
+      var result = await aziendaService.SearchAziende(ragioneSocialePattern, codiceFiscalePattern);
+      var response = CreateResponse(result);
+
+      return response;
+    }
   }
 }

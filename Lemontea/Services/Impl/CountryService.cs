@@ -28,5 +28,15 @@ namespace Lemontea.Services.Impl
 
       return OperationResult.Ok(countriesDto);
     }
+
+    public async Task<OperationResult> GetStatesByCountry(string alpha2Code)
+    {
+      if (alpha2Code != "IT")
+        return OperationResult.Ok(new List<State>());
+
+      var states = await dbContext.States.ToListAsync();
+
+      return OperationResult.Ok(states);
+    }
   }
 }
