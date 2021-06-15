@@ -52,7 +52,7 @@ namespace Lemontea.Client.Controllers
       return View(nameof(Index));
     }
 
-    [HttpPost]
+    [HttpPut]
     public async Task<IActionResult> Edit(ContattoDto contattoDto)
     {
       //if (!ModelState.IsValid)

@@ -1,35 +1,34 @@
 ﻿@model Contatto
 
-<div class="modal-body">
-  <form id="contatto_form">
-    <div class="row">
-      <div class="form-group col-6">
-        @Html.LabelFor(m => m.Nome, "Nome")
-        @Html.EditorFor(m => m.Nome, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(m => m.Nome, "", new { @class = "text-danger" })
-      </div>
-      <div class="form-group col-6">
-        @Html.LabelFor(m => m.Cognome, "Cognome")
-        @Html.EditorFor(m => m.Cognome, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(m => m.Cognome, "", new { @class = "text-danger" })
-      </div>
+<form id="contatto_form">
+  @Html.HiddenFor(model => model.Id)
+  <div class="row">
+    <div class="form-group col-6">
+      @Html.LabelFor(m => m.Nome, "Nome")
+      @Html.EditorFor(m => m.Nome, new { htmlAttributes = new { @class = "form-control" } })
+      @Html.ValidationMessageFor(m => m.Nome, "", new { @class = "text-danger" })
     </div>
-    <div class="row">
-      <div class="form-group col-4">
-        @Html.LabelFor(m => m.Email, "Email")
-        @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-      </div>
-      <div class="form-group col-4">
-        @Html.LabelFor(m => m.Telefono, "Telefono")
-        @Html.EditorFor(m => m.Telefono, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(m => m.Telefono, "", new { @class = "text-danger" })
-      </div>
-      <div class="form-group col-4">
-        @Html.LabelFor(m => m.Cellulare, "Cellulare")
-        @Html.EditorFor(m => m.Cellulare, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(m => m.Cellulare, "", new { @class = "text-danger" })
-      </div>
+    <div class="form-group col-6">
+      @Html.LabelFor(m => m.Cognome, "Cognome")
+      @Html.EditorFor(m => m.Cognome, new { htmlAttributes = new { @class = "form-control" } })
+      @Html.ValidationMessageFor(m => m.Cognome, "", new { @class = "text-danger" })
     </div>
-  </form>
-</div>
+  </div>
+  <div class="row">
+    <div class="form-group col-4">
+      @Html.LabelFor(m => m.Email, "Email")
+      @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control" } })
+      @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group col-4">
+      @Html.LabelFor(m => m.Telefono, "Telefono")
+      @Html.EditorFor(m => m.Telefono, new { htmlAttributes = new { @class = "form-control" } })
+      @Html.ValidationMessageFor(m => m.Telefono, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group col-4">
+      @Html.LabelFor(m => m.Cellulare, "Cellulare")
+      @Html.EditorFor(m => m.Cellulare, new { htmlAttributes = new { @class = "form-control" } })
+      @Html.ValidationMessageFor(m => m.Cellulare, "", new { @class = "text-danger" })
+    </div>
+  </div>
+</form>

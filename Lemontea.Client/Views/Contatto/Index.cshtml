@@ -11,7 +11,7 @@
   )
 </div>
 
-@if (Model.Count == 0)
+@if (Model != null && Model.Count == 0)
 {
   <h5>Nessun contato trovato</h5>
 }
@@ -64,10 +64,10 @@ else
           Salva contatto
         </h4>
         @*<button type="button" class="close" data-dismiss="modal" aria-label="Close" />*@
-        <i class="fas fa-close" data-dismiss="modal" aria-label="Close" />
+        @*<i class="fas fa-close" data-dismiss="modal" aria-label="Close" />*@
       </div>
 
-      <div id="editing_modal_body_container"></div>
+      <div id="editing_modal_body" class="modal-body"></div>
 
       <div class="modal-footer">
         <button id="btn_edit" type="button" class="btn btn-primary">Salva</button>
@@ -84,7 +84,7 @@ else
 
       <div class="modal-header">
         <h4 class="modal-title">Elimina contatto</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" />
+        @*<button type="button" class="close" data-dismiss="modal" aria-label="Close" />*@
       </div>
 
       <div class="modal-body">
@@ -115,7 +115,7 @@ else
           id: id
         },
         success: data => {
-          $('#editing_modal_body_container').html(data);
+          $('#editing_modal_body').html(data);
 
           $('#edit_modal').modal({
             backdrop: 'static',
@@ -131,7 +131,7 @@ else
         url: '/Contatto/AddDialog',
         method: 'GET',
         success: data => {
-          $('#editing_modal_body_container').html(data);
+          $('#editing_modal_body').html(data);
 
           $('#edit_modal').modal({
             backdrop: 'static',
