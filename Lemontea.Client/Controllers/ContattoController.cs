@@ -1,4 +1,5 @@
 ﻿using Lemontea.Client.Services;
+using Lemontea.Shared.Models.Dto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -27,10 +28,40 @@ namespace Lemontea.Client.Controllers
     }
 
     [HttpGet]
+    public IActionResult AddDialog()
+    {
+      return PartialView("_EditContattoModal");
+    }
+
+    [HttpGet]
     public async Task<IActionResult> EditDialog(int id)
     {
       var contatto = await contattoService.GetByIdAsync(id);
       return PartialView("_EditContattoModal", contatto);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Save(ContattoDto contattoDto)
+    {
+      //if (!ModelState.IsValid)
+      //{
+      //  return View("AddAzienda"); // nameof(Save) ??
+      //}
+
+      await contattoService.SaveAsync(contattoDto);
+      return View(nameof(Index));
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Edit(ContattoDto contattoDto)
+    {
+      //if (!ModelState.IsValid)
+      //{
+      //  return View("AddAzienda"); // nameof(Save) ??
+      //}
+
+      await contattoService.EditAsync(contattoDto);
+      return View(nameof(Index));
     }
 
     [HttpDelete]

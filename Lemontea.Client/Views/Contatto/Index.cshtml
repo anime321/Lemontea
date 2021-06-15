@@ -4,10 +4,10 @@
   @(Html.Kendo().Button()
   .Name("addContattoButton")
   .Content("Aggiungi contatto")
-  .Events(config =>
-  {
-    config.Click("showEditModal");
-  })
+  //.Events(config =>
+  //{
+  //  config.Click("showEditModal");
+  //})
   )
 </div>
 
@@ -54,7 +54,28 @@ else
   }
 }
 
-<div id="edit_modal_main">
+
+<div id="edit_modal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title">
+          Salva contatto
+        </h4>
+        @*<button type="button" class="close" data-dismiss="modal" aria-label="Close" />*@
+        <i class="fas fa-close" data-dismiss="modal" aria-label="Close" />
+      </div>
+
+      <div id="editing_modal_body_container"></div>
+
+      <div class="modal-footer">
+        <button id="btn_edit" type="button" class="btn btn-primary">Salva</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+      </div>
+
+    </div>
+  </div>
 </div>
 
 <div id="delete_modal" class="modal" tabindex="-1" role="alertdialog">
@@ -80,8 +101,43 @@ else
 </div>
 
 <script>
-  function showEditModal() {
-    $('#edit_modal').show();
+  // global var indicating whether we're adding a new contact or editing an existing one
+  var editingContatto;
+
+  const renderModal = id => {
+    if (id !== undefined) {
+      editingContatto = true;
+
+      $.ajax({
+        url: '/Contatto/EditDialog',
+        method: 'GET',
+        data: {
+          id: id
+        },
+        success: data => {
+          $('#editing_modal_body_container').html(data);
+
+          $('#edit_modal').modal({
+            backdrop: 'static'
+          }, 'show');
+        }
+      });
+    }
+    else {
+      editingContatto = false;
+
+      $.ajax({
+        url: '/Contatto/AddDialog',
+        method: 'GET',
+        success: data => {
+          $('#editing_modal_body_container').html(data);
+
+          $('#edit_modal').modal({
+            backdrop: 'static'
+          }, 'show');
+        }
+      });
+    }
   }
 
   // jquery stuff
@@ -92,9 +148,14 @@ else
       $('#btn_delete').attr('data-id', id);
     });
 
+
+    $('#addContattoButton').click(function (e) {
+      renderModal();
+    });
+
     $('.di-edit').click(function (e) {
       const id = $(this).attr('data-id');
-      $('#btn_edit').attr('data-id', id);
+      renderModal(id);
     });
 
   });
@@ -113,12 +174,16 @@ else
       }
     });
 
-  });
-
-  $('#btn_edit').click(function (e) {
-    const id = $(this).attr('data-id');
-
-  });
+    $('#btn_edit').click(function (e) {
+      $.ajax({
+        url: editingContatto ? '/Contatto/Edit' : '/Contatto/Save',
+        method: editingContatto ? 'PUT' : 'POST',
+        data: $('#contatto_form').serialize(),
+        success: data => {
+          window.location = '/Contatto/Index'
+        }
+      });
+    });
 
   });
 </script>

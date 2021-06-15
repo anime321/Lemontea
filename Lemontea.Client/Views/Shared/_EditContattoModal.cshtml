@@ -1,57 +1,35 @@
 ﻿@model Contatto
 
-<div id="edit_modal" class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <h4 class="modal-title">
-          Salva contatto
-        </h4>
-        @*<button type="button" class="close" data-dismiss="modal" aria-label="Close" />*@
-        <i class="fas fa-close" data-dismiss="modal" aria-label="Close" />
+<div class="modal-body">
+  <form id="contatto_form">
+    <div class="row">
+      <div class="form-group col-6">
+        @Html.LabelFor(m => m.Nome, "Nome")
+        @Html.EditorFor(m => m.Nome, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.Nome, "", new { @class = "text-danger" })
       </div>
-
-      <div class="modal-body">
-        <form>
-          <div class="row">
-            <div class="form-group col-6">
-              @Html.LabelFor(m => m.Nome, "Nome")
-              @Html.EditorFor(m => m.Nome, new { htmlAttributes = new { @class = "form-control" } })
-              @Html.ValidationMessageFor(m => m.Nome, "", new { @class = "text-danger" })
-            </div>
-            <div class="form-group col-6">
-              @Html.LabelFor(m => m.Cognome, "Cognome")
-              @Html.EditorFor(m => m.Cognome, new { htmlAttributes = new { @class = "form-control" } })
-              @Html.ValidationMessageFor(m => m.Cognome, "", new { @class = "text-danger" })
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-group col-4">
-              @Html.LabelFor(m => m.Email, "Nome")
-              @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control" } })
-              @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-            </div>
-            <div class="form-group col-4">
-              @Html.LabelFor(m => m.Telefono, "Cognome")
-              @Html.EditorFor(m => m.Telefono, new { htmlAttributes = new { @class = "form-control" } })
-              @Html.ValidationMessageFor(m => m.Telefono, "", new { @class = "text-danger" })
-            </div>
-            <div class="form-group col-4">
-              @Html.LabelFor(m => m.Cellulare, "Cognome")
-              @Html.EditorFor(m => m.Cellulare, new { htmlAttributes = new { @class = "form-control" } })
-              @Html.ValidationMessageFor(m => m.Cellulare, "", new { @class = "text-danger" })
-            </div>
-          </div>
-        </form>
+      <div class="form-group col-6">
+        @Html.LabelFor(m => m.Cognome, "Cognome")
+        @Html.EditorFor(m => m.Cognome, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.Cognome, "", new { @class = "text-danger" })
       </div>
-
-      <div class="modal-footer">
-        <button id="btn_edit" type="button" class="btn btn-primary">Salva</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
-      </div>
-
     </div>
-  </div>
+    <div class="row">
+      <div class="form-group col-4">
+        @Html.LabelFor(m => m.Email, "Email")
+        @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+      </div>
+      <div class="form-group col-4">
+        @Html.LabelFor(m => m.Telefono, "Telefono")
+        @Html.EditorFor(m => m.Telefono, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.Telefono, "", new { @class = "text-danger" })
+      </div>
+      <div class="form-group col-4">
+        @Html.LabelFor(m => m.Cellulare, "Cellulare")
+        @Html.EditorFor(m => m.Cellulare, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.Cellulare, "", new { @class = "text-danger" })
+      </div>
+    </div>
+  </form>
 </div>
-
