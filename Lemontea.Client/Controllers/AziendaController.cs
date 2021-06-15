@@ -43,33 +43,23 @@ namespace Lemontea.Client.Controllers
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> SaveAzienda(AziendaDto aziendaDto)
     {
-      if (!ModelState.IsValid)
-      {
-        return View("AddAzienda");
-      }
-
       await aziendaService.SaveAsync(aziendaDto);
-      return View(nameof(Index));
+      return Ok();
     }
 
     [HttpPut]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> EditAzienda(AziendaDto aziendaDto)
     {
-      if (!ModelState.IsValid)
-      {
-        return View("AddAzienda", aziendaDto.Id);
-      }
-
       await aziendaService.EditAsync(aziendaDto);
-      return View(nameof(Index));
+      return Ok();
     }
 
     [HttpDelete]
     public async Task<IActionResult> RemoveAzienda(AziendaDto aziendaDto)
     {
       await aziendaService.RemoveAsync(aziendaDto.Id);
-      return View(nameof(Index));
+      return Ok();
     }
 
     [HttpGet]

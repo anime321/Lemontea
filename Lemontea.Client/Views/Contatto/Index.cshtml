@@ -104,95 +104,103 @@ else
   </div>
 </div>
 
-<script>
-  // global var indicating whether we're adding a new contact or editing an existing one
-  var editingContatto;
+@section Scripts {
+  @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-  function showEditModal() {
-    renderModal();
-  }
+  <script>
+    // global var indicating whether we're adding a new contact or editing an existing one
+    var editingContatto;
 
-  const renderModal = id => {
-    if (id !== undefined) {
-      editingContatto = true;
-
-      $.ajax({
-        url: '/Contatto/EditDialog',
-        method: 'GET',
-        data: {
-          id: id
-        },
-        success: data => {
-          $('#editing_modal_body').html(data);
-
-          $('#edit_modal').modal({
-            backdrop: 'static',
-            keyboard: false
-          });
-        }
-      });
-    }
-    else {
-      editingContatto = false;
-
-      $.ajax({
-        url: '/Contatto/AddDialog',
-        method: 'GET',
-        success: data => {
-          $('#editing_modal_body').html(data);
-
-          $('#edit_modal').modal({
-            backdrop: 'static',
-            keyboard: false
-          });
-        }
-      });
-    }
-  }
-
-  // jquery stuff
-  $(document).ready(() => {
-
-    $('.di-delete').click(function (e) {
-      const id = $(this).attr('data-id');
-      $('#btn_delete').attr('data-id', id);
-    });
-
-
-    $('#addContattoButton').click(function (e) {
+    function showEditModal() {
       renderModal();
-    });
+    }
 
-    $('.di-edit').click(function (e) {
-      const id = $(this).attr('data-id');
-      renderModal(id);
-    });
+    const renderModal = id => {
+      if (id !== undefined) {
+        editingContatto = true;
 
-  });
+        $.ajax({
+          url: '/Contatto/EditDialog',
+          method: 'GET',
+          data: {
+            id: id
+          },
+          success: data => {
+            $('#editing_modal_body').html(data);
 
-  $('#btn_delete').click(function (e) {
-    const id = $(this).attr('data-id');
-
-    $.ajax({
-      url: '/Contatto/Remove',
-      method: 'DELETE',
-      data: {
-        id: id
-      },
-      success: data => {
-        window.location = '/Contatto/Index';
+            $('#edit_modal').modal({
+              backdrop: 'static',
+              keyboard: false
+            });
+          }
+        });
       }
-    });
-  });
+      else {
+        editingContatto = false;
 
-  $('#btn_edit').click(function (e) {
-    $.ajax({
-      url: editingContatto ? '/Contatto/Edit' : '/Contatto/Save',
-      method: editingContatto ? 'PUT' : 'POST',
-      data: $('#contatto_form').serialize(),
-      success: data => {
-        window.location = '/Contatto/Index';
+        $.ajax({
+          url: '/Contatto/AddDialog',
+          method: 'GET',
+          success: data => {
+            $('#editing_modal_body').html(data);
+
+            $('#edit_modal').modal({
+              backdrop: 'static',
+              keyboard: false
+            });
+          }
+        });
       }
+    }
+
+    // jquery stuff
+    $(document).ready(() => {
+
+      $('.di-delete').click(function (e) {
+        const id = $(this).attr('data-id');
+        $('#btn_delete').attr('data-id', id);
+      });
+
+
+      $('#addContattoButton').click(function (e) {
+        renderModal();
+      });
+
+      $('.di-edit').click(function (e) {
+        const id = $(this).attr('data-id');
+        renderModal(id);
+      });
+
+      $('#btn_edit').click(function (e) {
+        if (!$('#contatto_form').valid())
+          return;
+
+        $.ajax({
+          url: editingContatto ? '/Contatto/Edit' : '/Contatto/Save',
+          method: editingContatto ? 'PUT' : 'POST',
+          data: $('#contatto_form').serialize(),
+          success: res => {
+            window.location = '/Contatto/Index';
+          }
+        });
+      });
+
+      $('#btn_delete').click(function (e) {
+        const id = $(this).attr('data-id');
+
+        $.ajax({
+          url: '/Contatto/Remove',
+          method: 'DELETE',
+          data: {
+            id: id
+          },
+          success: data => {
+            window.location = '/Contatto/Index';
+          }
+        });
+      });
+
     });
-  });
-</script>
+  </script>
+
+}

@@ -43,25 +43,15 @@ namespace Lemontea.Client.Controllers
     [HttpPost]
     public async Task<IActionResult> Save(ContattoDto contattoDto)
     {
-      //if (!ModelState.IsValid)
-      //{
-      //  return View("AddAzienda"); // nameof(Save) ??
-      //}
-
       await contattoService.SaveAsync(contattoDto);
-      return View(nameof(Index));
+      return Ok();
     }
 
     [HttpPut]
     public async Task<IActionResult> Edit(ContattoDto contattoDto)
     {
-      //if (!ModelState.IsValid)
-      //{
-      //  return View("AddAzienda"); // nameof(Save) ??
-      //}
-
       await contattoService.EditAsync(contattoDto);
-      return View(nameof(Index));
+      return Ok();
     }
 
     [HttpDelete]
