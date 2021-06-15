@@ -45,7 +45,9 @@ namespace Lemontea.Services.Impl
       await dbContext.Aziende.AddAsync(azienda);
       await dbContext.SaveChangesAsync();
 
-      return OperationResult.Ok(azienda);
+      aziendaDto.Id = azienda.Id;
+
+      return OperationResult.Ok(aziendaDto);
     }
 
     public async Task<OperationResult> EditAsync(AziendaDto aziendaDto)
@@ -68,7 +70,7 @@ namespace Lemontea.Services.Impl
 
       await dbContext.SaveChangesAsync();
 
-      return OperationResult.Ok(azienda);
+      return OperationResult.Ok(aziendaDto);
     }
 
     public async Task<OperationResult> RemoveAsync(int id)
@@ -116,7 +118,9 @@ namespace Lemontea.Services.Impl
         aziende = await dbContext.Aziende.ToListAsync();
       }
 
-      return OperationResult.Ok(aziende);
+      var aziendeDto = mapper.Map<List<Azienda>, List<AziendaDto>>(aziende);
+
+      return OperationResult.Ok(aziendeDto);
     }
   }
 }

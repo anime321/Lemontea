@@ -1,5 +1,6 @@
 ﻿using Lemontea.Client.Api;
 using Lemontea.Client.Models;
+using Lemontea.Shared.Models.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,12 +17,12 @@ namespace Lemontea.Client.Services.Impl
       this.lemonteaApi = lemonteaApi;
     }
 
-    public async Task<List<Country>> GetAsync()
+    public async Task<List<CountryDto>> GetAsync()
     {
       return await lemonteaApi.GetCountries();
     }
 
-    public async Task<List<State>> GetStatesByCountryAsync(string alpha2Code)
+    public async Task<List<StateDto>> GetStatesByCountryAsync(string alpha2Code)
     {
       return await lemonteaApi.GetStatesByCountry(alpha2Code);
     }

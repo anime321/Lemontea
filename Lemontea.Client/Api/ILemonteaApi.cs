@@ -11,42 +11,42 @@ namespace Lemontea.Client.Api
   public interface ILemonteaApi
   {
     [Get("/azienda")]
-    Task<List<Azienda>> GetAziende();
+    Task<List<AziendaDto>> GetAziende();
 
     [Get("/azienda/{id}")]
-    Task<Azienda> GetAziendaById(int id);
+    Task<AziendaDto> GetAziendaById(int id);
 
     [Post("/azienda")]
-    Task<Azienda> SaveAzienda(AziendaDto aziendaDto);
+    Task<AziendaDto> SaveAzienda(AziendaDto aziendaDto);
 
     [Put("/azienda")]
-    Task<Azienda> EditAzienda(AziendaDto aziendaDto);
+    Task<AziendaDto> EditAzienda(AziendaDto aziendaDto);
 
     [Delete("/azienda/{id}")]
     Task RemoveAzienda(int id);
 
     [Get("/azienda/search")]
-    Task<List<Azienda>> SearchAziende(string ragioneSocialePattern, string codiceFiscalePattern);
+    Task<List<AziendaDto>> SearchAziende(string ragioneSocialePattern, string codiceFiscalePattern);
 
 
     [Get("/country")]
-    Task<List<Country>> GetCountries();
+    Task<List<CountryDto>> GetCountries();
 
     [Get("/country/states")]
-    Task<List<State>> GetStatesByCountry(string alpha2Code);
+    Task<List<StateDto>> GetStatesByCountry(string alpha2Code);
 
 
     [Get("/contatto")]
-    Task<List<Contatto>> GetContatti();
+    Task<List<ContattoDto>> GetContatti();
 
     [Get("/contatto/{id}")]
-    Task<Contatto> GetContattoById(int id);
+    Task<ContattoDto> GetContattoById(int id);
 
     [Post("/contatto")]
-    Task<Contatto> SaveContatto(ContattoDto contattoDto);
+    Task<ContattoDto> SaveContatto(ContattoDto contattoDto);
 
     [Put("/contatto")]
-    Task<Contatto> EditContatto(ContattoDto contattoDto);
+    Task<ContattoDto> EditContatto(ContattoDto contattoDto);
 
     [Delete("/contatto/{id}")]
     Task RemoveContatto(int id);

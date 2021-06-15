@@ -1,4 +1,5 @@
 ﻿using Lemontea.Client.Models;
+using Lemontea.Shared.Models.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace Lemontea.Client.Services
 {
   public interface ICountryService
   {
-    Task<List<Country>> GetAsync();
-    Task<List<State>> GetStatesByCountryAsync(string alpha2Code);
+    Task<List<CountryDto>> GetAsync();
+    Task<List<StateDto>> GetStatesByCountryAsync(string alpha2Code);
   }
 }

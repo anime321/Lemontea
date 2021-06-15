@@ -36,7 +36,9 @@ namespace Lemontea.Services.Impl
 
       var states = await dbContext.States.ToListAsync();
 
-      return OperationResult.Ok(states);
+      var statesDto = mapper.Map<List<State>, List<StateDto>>(states);
+
+      return OperationResult.Ok(statesDto);
     }
   }
 }

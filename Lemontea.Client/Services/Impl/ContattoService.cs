@@ -17,22 +17,22 @@ namespace Lemontea.Client.Services.Impl
       this.lemonteaApi = lemonteaApi;
     }
 
-    public async Task<List<Contatto>> GetAsync()
+    public async Task<List<ContattoDto>> GetAsync()
     {
       return await lemonteaApi.GetContatti();
     }
 
-    public async Task<Contatto> GetByIdAsync(int id)
+    public async Task<ContattoDto> GetByIdAsync(int id)
     {
       return await lemonteaApi.GetContattoById(id);
     }
 
-    public async Task<Contatto> SaveAsync(ContattoDto contattoDto)
+    public async Task<ContattoDto> SaveAsync(ContattoDto contattoDto)
     {
       return await lemonteaApi.SaveContatto(contattoDto);
     }
 
-    public async Task<Contatto> EditAsync(ContattoDto contattoDto)
+    public async Task<ContattoDto> EditAsync(ContattoDto contattoDto)
     {
       return await lemonteaApi.EditContatto(contattoDto);
     }

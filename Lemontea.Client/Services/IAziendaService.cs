@@ -9,11 +9,11 @@ namespace Lemontea.Client.Services
 {
   public interface IAziendaService
   {
-    Task<List<Azienda>> GetAsync();
-    Task<Azienda> GetByIdAsync(int id);
-    Task<Azienda> SaveAsync(AziendaDto aziendaDto);
-    Task<Azienda> EditAsync(AziendaDto aziendaDto);
+    Task<List<AziendaDto>> GetAsync();
+    Task<AziendaDto> GetByIdAsync(int id);
+    Task<AziendaDto> SaveAsync(AziendaDto aziendaDto);
+    Task<AziendaDto> EditAsync(AziendaDto aziendaDto);
     Task RemoveAsync(int id);
-    Task<List<Azienda>> SearchAsync(string ragioneSocialePattern, string codiceFiscalePattern);
+    Task<List<AziendaDto>> SearchAsync(string ragioneSocialePattern, string codiceFiscalePattern);
   }
 }

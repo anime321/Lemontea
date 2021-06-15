@@ -9,10 +9,10 @@ namespace Lemontea.Client.Services
 {
   public interface IContattoService
   {
-    Task<List<Contatto>> GetAsync();
-    Task<Contatto> GetByIdAsync(int id);
-    Task<Contatto> SaveAsync(ContattoDto contattoDto);
-    Task<Contatto> EditAsync(ContattoDto contattoDto);
+    Task<List<ContattoDto>> GetAsync();
+    Task<ContattoDto> GetByIdAsync(int id);
+    Task<ContattoDto> SaveAsync(ContattoDto contattoDto);
+    Task<ContattoDto> EditAsync(ContattoDto contattoDto);
     Task RemoveAsync(int id);
   }
 }

@@ -44,7 +44,9 @@ namespace Lemontea.Services.Impl
       await dbContext.Contatti.AddAsync(contatto);
       await dbContext.SaveChangesAsync();
 
-      return OperationResult.Ok();
+      contattoDto.Id = contatto.Id;
+
+      return OperationResult.Ok(contattoDto);
     }
 
     public async Task<OperationResult> EditAsync(ContattoDto contattoDto)
@@ -59,7 +61,7 @@ namespace Lemontea.Services.Impl
 
       await dbContext.SaveChangesAsync();
 
-      return OperationResult.Ok(contatto);
+      return OperationResult.Ok(contattoDto);
     }
 
     public async Task<OperationResult> RemoveAsync(int id)

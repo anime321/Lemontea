@@ -1,8 +1,9 @@
-﻿@model List<Azienda>
+﻿@using Lemontea.Shared.Models.Dto;
+@model List<AziendaDto>
 
 @if (Model != null)
 {
-  foreach (Azienda a in Model)
+  foreach (var a in Model)
   {
     <li class="list-group-item">@a.RagioneSociale, @a.CodiceFiscale</li>
   }

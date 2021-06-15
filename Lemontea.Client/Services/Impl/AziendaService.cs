@@ -17,22 +17,22 @@ namespace Lemontea.Client.Services.Impl
       this.lemonteaApi = lemonteaApi;
     }
 
-    public async Task<List<Azienda>> GetAsync()
+    public async Task<List<AziendaDto>> GetAsync()
     {
       return await lemonteaApi.GetAziende();
     }
 
-    public async Task<Azienda> GetByIdAsync(int id)
+    public async Task<AziendaDto> GetByIdAsync(int id)
     {
       return await lemonteaApi.GetAziendaById(id);
     }
 
-    public async Task<Azienda> SaveAsync(AziendaDto aziendaDto)
+    public async Task<AziendaDto> SaveAsync(AziendaDto aziendaDto)
     {
       return await lemonteaApi.SaveAzienda(aziendaDto);
     }
 
-    public async Task<Azienda> EditAsync(AziendaDto aziendaDto)
+    public async Task<AziendaDto> EditAsync(AziendaDto aziendaDto)
     {
       return await lemonteaApi.EditAzienda(aziendaDto);
     }
@@ -42,7 +42,7 @@ namespace Lemontea.Client.Services.Impl
       await lemonteaApi.RemoveAzienda(id);
     }
 
-    public async Task<List<Azienda>> SearchAsync(string ragioneSocialePattern, string codiceFiscalePattern)
+    public async Task<List<AziendaDto>> SearchAsync(string ragioneSocialePattern, string codiceFiscalePattern)
     {
       return await lemonteaApi.SearchAziende(ragioneSocialePattern, codiceFiscalePattern);
     }

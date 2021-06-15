@@ -1,4 +1,5 @@
-﻿@model List<Azienda>
+﻿@using Lemontea.Shared.Models.Dto 
+@model List<AziendaDto>
 
 <div style="margin-top: 10px; margin-bottom: 10px;">
   @(Html.Kendo().Button()
@@ -19,7 +20,7 @@
 )
 </div>
 
-@(Html.Kendo().Grid<Azienda>(Model)
+@(Html.Kendo().Grid<AziendaDto>(Model)
   .Name("GridAziende")
   .Columns(columns =>
   {
