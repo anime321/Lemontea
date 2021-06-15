@@ -118,8 +118,9 @@ else
           $('#editing_modal_body_container').html(data);
 
           $('#edit_modal').modal({
-            backdrop: 'static'
-          }, 'show');
+            backdrop: 'static',
+            keyboard: false
+          });// , 'show');
         }
       });
     }
@@ -133,8 +134,9 @@ else
           $('#editing_modal_body_container').html(data);
 
           $('#edit_modal').modal({
-            backdrop: 'static'
-          }, 'show');
+            backdrop: 'static',
+            keyboard: false
+          }); //, 'show');
         }
       });
     }
@@ -173,17 +175,16 @@ else
         window.location = '/Contatto/Index';
       }
     });
+  });
 
-    $('#btn_edit').click(function (e) {
-      $.ajax({
-        url: editingContatto ? '/Contatto/Edit' : '/Contatto/Save',
-        method: editingContatto ? 'PUT' : 'POST',
-        data: $('#contatto_form').serialize(),
-        success: data => {
-          window.location = '/Contatto/Index'
-        }
-      });
+  $('#btn_edit').click(function (e) {
+    $.ajax({
+      url: editingContatto ? '/Contatto/Edit' : '/Contatto/Save',
+      method: editingContatto ? 'PUT' : 'POST',
+      data: $('#contatto_form').serialize(),
+      success: data => {
+        window.location = '/Contatto/Index'
+      }
     });
-
   });
 </script>
