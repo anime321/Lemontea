@@ -4,53 +4,56 @@
   @(Html.Kendo().Button()
   .Name("addContattoButton")
   .Content("Aggiungi contatto")
-  //.Events(config =>
-  //{
-  //  config.Click("showEditModal");
-  //})
+  .Events(config =>
+  {
+    config.Click("showEditModal");
+  })
   )
 </div>
 
 @if (Model != null && Model.Count == 0)
 {
-  <h5>Nessun contato trovato</h5>
+  <h5>Nessun contatto trovato</h5>
 }
 else
 {
-  @foreach (var contatto in Model)
+  @if (Model != null)
   {
-    <div class="card" style="width: 18rem">
+    @foreach (var contatto in Model)
+    {
+      <div class="card" style="width: 18rem">
 
-      <div class="card-header">
-        <div class="float-right">
+        <div class="card-header">
+          <div class="float-right">
 
-          <div class="dropdown">
-            <button class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
-                <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
-              </svg>
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <div class="dropdown-item di-edit" data-toggle="modal" data-target="#edit_modal" data-id="@contatto.Id">Modifica</div>
-              <div class="dropdown-item di-delete" data-toggle="modal" data-target="#delete_modal" data-id="@contatto.Id" href="#">Elimina</div>
+            <div class="dropdown">
+              <button class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+                  <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+                </svg>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div class="dropdown-item di-edit" data-toggle="modal" data-target="#edit_modal" data-id="@contatto.Id">Modifica</div>
+                <div class="dropdown-item di-delete" data-toggle="modal" data-target="#delete_modal" data-id="@contatto.Id" href="#">Elimina</div>
+              </div>
             </div>
           </div>
+
         </div>
 
+        <div class="card-body">
+
+          <h6 class="card-title">
+            @contatto.Nome @contatto.Cognome
+          </h6>
+
+          <p class="card-title">@contatto.Email</p>
+          <p class="card-text">@contatto.Telefono</p>
+          <p class="card-text">@contatto.Cellulare</p>
+
+        </div>
       </div>
-
-      <div class="card-body">
-
-        <h6 class="card-title">
-          @contatto.Nome @contatto.Cognome
-        </h6>
-
-        <p class="card-title">@contatto.Email</p>
-        <p class="card-text">@contatto.Telefono</p>
-        <p class="card-text">@contatto.Cellulare</p>
-
-      </div>
-    </div>
+    }
   }
 }
 
@@ -103,6 +106,10 @@ else
 <script>
   // global var indicating whether we're adding a new contact or editing an existing one
   var editingContatto;
+
+  function showEditModal() {
+    renderModal();
+  }
 
   const renderModal = id => {
     if (id !== undefined) {
