@@ -12,11 +12,11 @@ namespace Lemontea.Shared.Models.Dto
     public int Id { get; set; }
 
     [Required]
-    [StringLength(50)]
+    [StringLength(50, MinimumLength = 2)]
     public string Nome { get; set; }
 
     [Required]
-    [StringLength(50)]
+    [StringLength(50, MinimumLength = 2)]
     public string Cognome { get; set; }
 
     [Required]
