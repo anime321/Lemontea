@@ -27,7 +27,7 @@ namespace Lemontea.Shared.Models.Dto
     public int CAP { get; set; }
 
     [Required]
-    [StringLength(50, MinimumLength = 3)]
+    [StringLength(50)]
     public string Nazione { get; set; }
 
     [StringLength(50, MinimumLength = 2)]

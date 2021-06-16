@@ -59,7 +59,7 @@ namespace Lemontea.Client.Controllers
     {
       await contattoService.RemoveAsync(id);
 
-      return View(nameof(Index));
+      return Ok();
     }
 
   }

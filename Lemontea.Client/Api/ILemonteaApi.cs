@@ -17,7 +17,7 @@ namespace Lemontea.Client.Api
     Task<AziendaDto> GetAziendaById(int id);
 
     [Post("/azienda")]
-    Task<AziendaDto> SaveAzienda(AziendaDto aziendaDto);
+    Task<ApiResponse<AziendaDto>> SaveAzienda(AziendaDto aziendaDto);
 
     [Put("/azienda")]
     Task<AziendaDto> EditAzienda(AziendaDto aziendaDto);

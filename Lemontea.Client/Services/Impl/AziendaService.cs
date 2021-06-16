@@ -29,7 +29,8 @@ namespace Lemontea.Client.Services.Impl
 
     public async Task<AziendaDto> SaveAsync(AziendaDto aziendaDto)
     {
-      return await lemonteaApi.SaveAzienda(aziendaDto);
+      var response = await lemonteaApi.SaveAzienda(aziendaDto);
+      return response.Content;
     }
 
     public async Task<AziendaDto> EditAsync(AziendaDto aziendaDto)
