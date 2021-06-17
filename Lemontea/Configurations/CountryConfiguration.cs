@@ -13,9 +13,6 @@ namespace Lemontea.Configurations
     public void Configure(EntityTypeBuilder<Country> builder)
     {
       builder.HasKey(c => new { c.Language, c.Alpha2Code });
-
-      //builder.HasMany(c => c.States)
-      //  .WithOne();
     }
   }
 }

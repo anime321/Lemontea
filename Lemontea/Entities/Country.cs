@@ -24,7 +24,5 @@ namespace Lemontea.Entities
     public string CountryType { get; set; }
 
     public string PhoneCode { get; set; }
-
-    //public List<State> States { get; set; }
   }
 }

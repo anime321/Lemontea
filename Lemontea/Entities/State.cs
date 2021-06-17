@@ -14,7 +14,5 @@ namespace Lemontea.Entities
 
     [Column("State")]
     public string StateName { get; set; }
-
-    //public Country Country { get; set; }
   }
 }
