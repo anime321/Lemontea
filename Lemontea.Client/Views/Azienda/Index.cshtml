@@ -28,8 +28,9 @@
     columns.Bound(m => m.Telefono);
     columns.Bound(m => m.SitoWeb);
     columns.Bound(m => m.Email);
-    columns.Command(command => command.Custom("EditAzienda").Text("Modifica").Click("editAziendaRedirect")).Width(120);
-    columns.Command(command => command.Destroy().Text("Elimina")).Width(120);
+    columns.Command(command => command.Custom("DettaglioAzienda").Text("➡️").Click("dettaglioAziendaRedirect")).Width(60);
+    //columns.Command(command => command.Custom("EditAzienda").Text("Modifica").Click("editAziendaRedirect")).Width(120);
+    //columns.Command(command => command.Destroy().Text("Elimina")).Width(120);
   })
   .ToolBar(toolbar =>
   {
@@ -48,20 +49,25 @@
         m.Field(a => a.Telefono);
         m.Field(a => a.SitoWeb);
         m.Field(a => a.Email);
-      })
-      .Destroy(config =>
-      {
-        config.Action("RemoveAzienda", "Azienda");
-        config.Type(HttpVerbs.Delete);
       });
+      //.Destroy(config =>
+      //{
+      //  config.Action("RemoveAzienda", "Azienda");
+      //  config.Type(HttpVerbs.Delete);
+      //});
   })
 )
 
 <script>
-  function editAziendaRedirect(e) {
+  function dettaglioAziendaRedirect(e) {
+    let d = this.dataItem($(e.currentTarget).closest('tr'));
+    window.location.href = "@Url.Action("DettaglioAzienda", "Azienda")?id=" + d.Id;
+  }
+
+  @*function editAziendaRedirect(e) {
     let d = this.dataItem($(e.currentTarget).closest('tr'));
     window.location.href = "@Url.Action("AddAzienda", "Azienda")?id=" + d.Id;
-  }
+  }*@
 
   function goToAddAzienda(e) {
     window.location.href = "@Url.Action("AddAzienda", "Azienda")";

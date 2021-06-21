@@ -32,5 +32,22 @@
       @Html.EditorFor(m => m.Cellulare, new { htmlAttributes = new { @class = "form-control" } })
       @Html.ValidationMessageFor(m => m.Cellulare, "", new { @class = "text-danger" })
     </div>
+    <div class="form-group col">
+      @Html.LabelFor(model => model.AziendaId, "Azienda")
+      @(Html.Kendo().DropDownListFor(m => m.AziendaId)
+        .DataTextField("ragioneSociale")
+        .DataValueField("id")
+        .OptionLabel("Seleziona azienda...")
+        .HtmlAttributes(new { @class = "form-control" })
+        .DataSource(source =>
+        {
+          source.Read(read =>
+          {
+            read.Action("Get_Aziende", "Azienda");
+          })
+          .ServerFiltering(false);
+        })
+      )
+    </div>
   </div>
 </form>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Lemontea.Shared.Models.Dto
@@ -28,5 +29,11 @@ namespace Lemontea.Shared.Models.Dto
 
     [StringLength(50)]
     public string Cellulare { get; set; }
+
+    [Required]
+    public int AziendaId { get; set; }
+
+    [JsonIgnore]
+    public AziendaDto Azienda { get; set; }
   }
 }

@@ -13,51 +13,39 @@
 </div>
 
 <div class="row">
-
-  @if (Model != null && Model.Count == 0)
+  @foreach (var contatto in Model)
   {
-    <h5>Nessun contatto trovato</h5>
-  }
-  else
-  {
-    if (Model != null)
-    {
-      foreach (var contatto in Model)
-      {
-        <div class="card" style="width: 18rem; height: 14rem; margin: 4px">
+    <div class="card" style="width: 18rem; height: 14rem; margin: 4px">
 
-          <div class="card-header">
-            <b>@contatto.Nome @contatto.Cognome</b>
+      <div class="card-header">
+        <b>@contatto.Nome @contatto.Cognome</b>
 
-            <div class="float-right">
-              <div class="dropdown" style="cursor: pointer">
-                <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
-                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
-                  </svg>
-                </div>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <div class="dropdown-item di-edit" data-toggle="modal" data-target="#edit_modal" data-id="@contatto.Id">Modifica</div>
-                  <div class="dropdown-item di-delete" data-toggle="modal" data-target="#delete_modal" data-id="@contatto.Id" href="#">Elimina</div>
-                </div>
-              </div>
+        <div class="float-right">
+          <div class="dropdown" style="cursor: pointer">
+            <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+                <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+              </svg>
             </div>
-
-          </div>
-
-          <div class="card-body">
-
-            <p class="card-text">Email: @contatto.Email</p>
-            <p class="card-text">Telefono: @contatto.Telefono</p>
-            <p class="card-text">Cellulare: @contatto.Cellulare</p>
-
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <div class="dropdown-item di-edit" data-toggle="modal" data-target="#edit_modal" data-id="@contatto.Id">Modifica</div>
+              <div class="dropdown-item di-delete" data-toggle="modal" data-target="#delete_modal" data-id="@contatto.Id" href="#">Elimina</div>
+            </div>
           </div>
         </div>
-      }
-    }
+
+      </div>
+
+      <div class="card-body">
+
+        <p class="card-text">Email: @contatto.Email</p>
+        <p class="card-text">Telefono: @contatto.Telefono</p>
+        <p class="card-text">Cellulare: @contatto.Cellulare</p>
+
+      </div>
+    </div>
   }
 </div>
-
 
 <div id="edit_modal" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
@@ -181,6 +169,9 @@
           data: $('#contatto_form').serialize(),
           success: res => {
             window.location = '/Contatto/Index';
+          },
+          error: err => {
+            console.log(err);
           }
         });
       });

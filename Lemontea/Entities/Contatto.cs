@@ -15,5 +15,8 @@ namespace Lemontea.Entities
     public string Email { get; set; }
     public string Telefono { get; set; }
     public string Cellulare { get; set; }
+    public int AziendaId { get; set; }
+
+    public Azienda Azienda { get; set; }
   }
 }

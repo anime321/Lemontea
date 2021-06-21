@@ -25,5 +25,7 @@ namespace Lemontea.Entities
     public string SitoWeb { get; set; }
     public string PartitaIVA { get; set; }
     public string CodiceFiscale { get; set; }
+
+    public List<Contatto> Contatti { get; set; }
   }
 }

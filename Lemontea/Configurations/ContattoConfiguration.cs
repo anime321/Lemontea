@@ -8,10 +8,14 @@ using System.Threading.Tasks;
 
 namespace Lemontea.Configurations
 {
-  public class AziendaConfiguration : IEntityTypeConfiguration<Azienda>
+  public class ContattoConfiguration : IEntityTypeConfiguration<Contatto>
   {
-    public void Configure(EntityTypeBuilder<Azienda> builder)
+    public void Configure(EntityTypeBuilder<Contatto> builder)
     {
+      builder
+        .HasOne(c => c.Azienda)
+        .WithMany(a => a.Contatti)
+        .HasForeignKey(c => c.AziendaId);
     }
   }
 }

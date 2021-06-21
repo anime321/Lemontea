@@ -20,6 +20,7 @@ namespace Lemontea
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
       modelBuilder.ApplyConfiguration(new AziendaConfiguration());
+      modelBuilder.ApplyConfiguration(new ContattoConfiguration());
       modelBuilder.ApplyConfiguration(new CountryConfiguration());
       modelBuilder.ApplyConfiguration(new StateConfiguration());
     }

@@ -28,6 +28,20 @@ namespace Lemontea.Client.Controllers
     }
 
     [HttpGet]
+    public async Task<IActionResult> Get_Aziende()
+    {
+      var aziende = await aziendaService.GetAsync();
+      return Ok(aziende);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> DettaglioAzienda(int id)
+    {
+      var azienda = await aziendaService.GetByIdAsync(id);
+      return View("DettaglioAzienda", azienda);
+    }
+
+    [HttpGet]
     public async Task<IActionResult> AddAzienda(int id)
     {
       if (id == 0)
@@ -56,9 +70,9 @@ namespace Lemontea.Client.Controllers
     }
 
     [HttpDelete]
-    public async Task<IActionResult> RemoveAzienda(AziendaDto aziendaDto)
+    public async Task<IActionResult> RemoveAzienda(int id)
     {
-      await aziendaService.RemoveAsync(aziendaDto.Id);
+      await aziendaService.RemoveAsync(id);
       return Ok();
     }
 

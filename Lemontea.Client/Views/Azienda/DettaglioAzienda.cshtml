@@ -1,0 +1,54 @@
+﻿@using Lemontea.Shared.Models.Dto
+@model AziendaDto
+
+
+<div class="card">
+  <div class="card-header">
+    @Model.RagioneSociale
+  </div>
+  <div class="card-body">
+    <p class="card-text">@Model.Indirizzo</p>
+    <p class="card-text">@Model.Citta</p>
+    <p class="card-text">@Model.Email</p>
+    <p class="card-text">@Model.SitoWeb</p>
+  </div>
+
+  <div>
+    @(Html.Kendo().Button()
+    .Name("editAziendaButton")
+    .Content("Modifica")
+    .Events(config =>
+    {
+      config.Click("goToAddAzienda");
+    })
+  )
+    @(Html.Kendo().Button()
+    .Name("deleteAziendaButton")
+    .Content("Elimina")
+    .Events(config =>
+    {
+      config.Click("removeAzienda");
+    })
+    )
+  </div>
+</div>
+
+<div>
+  @Html.RenderPartialAsync("_ContattiAzienda", Model.Contatti)
+</div>
+
+<script>
+  function goToAddAzienda(e) {
+    window.location.href = "@Url.Action("AddAzienda", "Azienda", Model)";
+  }
+
+  function removeAzienda(e) {
+    $.ajax({
+      url: '/Azienda/RemoveAzienda/' + @Model.Id,
+      method: 'DELETE',
+      success: data => {
+        window.location.href = "@Url.Action("Index", "Azienda")";
+      }
+    })
+  }
+</script>
