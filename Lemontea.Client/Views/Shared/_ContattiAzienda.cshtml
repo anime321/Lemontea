@@ -1,10 +1,122 @@
 ﻿@using Lemontea.Shared.Models.Dto;
 @model List<ContattoDto>
 
+<style>
+  .addcontatto-btn {
+    border: none;
+  }
+</style>
+
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script>
+  // global var indicating whether we're adding a new contact or editing an existing one
+  var editingContatto;
+
+  function showEditModal() {
+    renderModal();
+  }
+
+  const renderModal = id => {
+    if (id !== undefined) {
+      editingContatto = true;
+
+      $.ajax({
+        url: '/Contatto/EditDialog',
+        method: 'GET',
+        data: {
+          id: id
+        },
+        success: data => {
+          $('#editing_modal_body').html(data);
+
+          // XXX
+          const queryString = window.location.search;
+          const urlParams = new URLSearchParams(queryString);
+          $('#aziendaIdField').val(urlParams.get('id'));
+
+          $('#edit_modal').modal({
+            backdrop: 'static',
+            keyboard: false
+          });
+        }
+      });
+    }
+    else {
+      editingContatto = false;
+
+      $.ajax({
+        url: '/Contatto/AddDialog',
+        method: 'GET',
+        success: data => {
+          $('#editing_modal_body').html(data);
+
+          // XXX
+          const queryString = window.location.search;
+          const urlParams = new URLSearchParams(queryString);
+          $('#aziendaIdField').val(urlParams.get('id'));
+
+          $('#edit_modal').modal({
+            backdrop: 'static',
+            keyboard: false
+          });
+        }
+      });
+    }
+  }
+
+
+  $(document).ready(() => {
+
+    $('.di-delete').click(function (e) {
+      const id = $(this).attr('data-id');
+      $('#btn_delete').attr('data-id', id);
+    });
+
+    $('.di-edit').click(function (e) {
+      const id = $(this).attr('data-id');
+      renderModal(id);
+    });
+
+    $('#btn_edit').click(function (e) {
+      if (!$('#contatto_form').valid())
+        return;
+
+      $.ajax({
+        url: editingContatto ? '/Contatto/Edit' : '/Contatto/Save',
+        method: editingContatto ? 'PUT' : 'POST',
+        data: $('#contatto_form').serialize(),
+        success: res => {
+          window.location.reload(true);
+        },
+        error: err => {
+          console.log(err);
+        }
+      });
+    });
+
+    $('#btn_delete').click(function (e) {
+      const id = $(this).attr('data-id');
+
+      $.ajax({
+        url: '/Contatto/Remove',
+        method: 'DELETE',
+        data: {
+          id: id
+        },
+        success: data => {
+          window.location.reload(true);
+        }
+      });
+    });
+
+  });
+</script>
+
 <div style="margin-top: 10px; margin-bottom: 10px">
   @(Html.Kendo().Button()
   .Name("addContattoButton")
-  .Content("Aggiungi contatto")
+  .Content("➕ Aggiungi contatto")
+  .HtmlAttributes(new { @class = "addcontatto-btn" })
   .Events(config =>
   {
     config.Click("showEditModal");
@@ -28,7 +140,7 @@
               </svg>
             </div>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <div class="dropdown-item di-edit" data-toggle="modal" data-target="#edit_modal" data-id="@contatto.Id">Modifica</div>
+              <div class="dropdown-item di-edit" data-id="@contatto.Id">Modifica</div>
               <div class="dropdown-item di-delete" data-toggle="modal" data-target="#delete_modal" data-id="@contatto.Id" href="#">Elimina</div>
             </div>
           </div>
@@ -91,107 +203,3 @@
     </div>
   </div>
 </div>
-
-@section Scripts {
-  @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-
-  <script>
-    // global var indicating whether we're adding a new contact or editing an existing one
-    var editingContatto;
-
-    function showEditModal() {
-      renderModal();
-    }
-
-    const renderModal = id => {
-      if (id !== undefined) {
-        editingContatto = true;
-
-        $.ajax({
-          url: '/Contatto/EditDialog',
-          method: 'GET',
-          data: {
-            id: id
-          },
-          success: data => {
-            $('#editing_modal_body').html(data);
-
-            $('#edit_modal').modal({
-              backdrop: 'static',
-              keyboard: false
-            });
-          }
-        });
-      }
-      else {
-        editingContatto = false;
-
-        $.ajax({
-          url: '/Contatto/AddDialog',
-          method: 'GET',
-          success: data => {
-            $('#editing_modal_body').html(data);
-
-            $('#edit_modal').modal({
-              backdrop: 'static',
-              keyboard: false
-            });
-          }
-        });
-      }
-    }
-
-    // jquery stuff
-    $(document).ready(() => {
-
-      $('.di-delete').click(function (e) {
-        const id = $(this).attr('data-id');
-        $('#btn_delete').attr('data-id', id);
-      });
-
-
-      $('#addContattoButton').click(function (e) {
-        renderModal();
-      });
-
-      $('.di-edit').click(function (e) {
-        const id = $(this).attr('data-id');
-        renderModal(id);
-      });
-
-      $('#btn_edit').click(function (e) {
-        if (!$('#contatto_form').valid())
-          return;
-
-        $.ajax({
-          url: editingContatto ? '/Contatto/Edit' : '/Contatto/Save',
-          method: editingContatto ? 'PUT' : 'POST',
-          data: $('#contatto_form').serialize(),
-          success: res => {
-            window.location = '/Contatto/Index';
-          },
-          error: err => {
-            console.log(err);
-          }
-        });
-      });
-
-      $('#btn_delete').click(function (e) {
-        const id = $(this).attr('data-id');
-
-        $.ajax({
-          url: '/Contatto/Remove',
-          method: 'DELETE',
-          data: {
-            id: id
-          },
-          success: data => {
-            window.location = '/Contatto/Index';
-          }
-        });
-      });
-
-    });
-  </script>
-
-}

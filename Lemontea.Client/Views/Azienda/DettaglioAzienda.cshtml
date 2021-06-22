@@ -1,19 +1,28 @@
 ﻿@using Lemontea.Shared.Models.Dto
 @model AziendaDto
 
+<style>
+  .elimina-btn {
+    background-color: crimson;
+  }
 
-<div class="card">
+  .elimina-btn:hover {
+    background-color: darkred;
+    color: #d3d3d3;
+  }
+</style>
+
+<div class="card" style="width: 18rem">
   <div class="card-header">
     @Model.RagioneSociale
   </div>
   <div class="card-body">
-    <p class="card-text">@Model.Indirizzo</p>
-    <p class="card-text">@Model.Citta</p>
-    <p class="card-text">@Model.Email</p>
-    <p class="card-text">@Model.SitoWeb</p>
+    <p class="card-text">📍&nbsp; @Model.Indirizzo @Model.NCivico, @Model.Citta</p>
+    <p class="card-text">📧 @Model.Email</p>
+    <p class="card-text">🌐&nbsp; @Model.SitoWeb</p>
   </div>
 
-  <div>
+  <div style="margin: 4px">
     @(Html.Kendo().Button()
     .Name("editAziendaButton")
     .Content("Modifica")
@@ -25,6 +34,7 @@
     @(Html.Kendo().Button()
     .Name("deleteAziendaButton")
     .Content("Elimina")
+    .HtmlAttributes(new { @class = "elimina-btn" })
     .Events(config =>
     {
       config.Click("removeAzienda");
@@ -34,7 +44,7 @@
 </div>
 
 <div>
-  @Html.RenderPartialAsync("_ContattiAzienda", Model.Contatti)
+  @await Html.PartialAsync("_ContattiAzienda", Model.Contatti)
 </div>
 
 <script>

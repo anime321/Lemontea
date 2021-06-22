@@ -4,6 +4,7 @@
 <form id="contatto_form">
   @Html.ValidationSummary(true, "", new { @class = "text-danger" })
   @Html.HiddenFor(model => model.Id)
+  @Html.HiddenFor(model => model.AziendaId, new { id = "aziendaIdField" })
   <div class="row">
     <div class="form-group col-6">
       @Html.LabelFor(m => m.Nome, "Nome")
@@ -31,23 +32,6 @@
       @Html.LabelFor(m => m.Cellulare, "Cellulare")
       @Html.EditorFor(m => m.Cellulare, new { htmlAttributes = new { @class = "form-control" } })
       @Html.ValidationMessageFor(m => m.Cellulare, "", new { @class = "text-danger" })
-    </div>
-    <div class="form-group col">
-      @Html.LabelFor(model => model.AziendaId, "Azienda")
-      @(Html.Kendo().DropDownListFor(m => m.AziendaId)
-        .DataTextField("ragioneSociale")
-        .DataValueField("id")
-        .OptionLabel("Seleziona azienda...")
-        .HtmlAttributes(new { @class = "form-control" })
-        .DataSource(source =>
-        {
-          source.Read(read =>
-          {
-            read.Action("Get_Aziende", "Azienda");
-          })
-          .ServerFiltering(false);
-        })
-      )
     </div>
   </div>
 </form>
