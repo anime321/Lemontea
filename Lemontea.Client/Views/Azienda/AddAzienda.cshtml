@@ -7,7 +7,7 @@
   .Content("Indietro")
   .Events(config =>
   {
-    config.Click("goToAziendaIndex");
+    config.Click("backToAziendaDettaglio");
   })
   )
 </div>
@@ -16,9 +16,8 @@
   function getSelectedCountry() {
     return $("#Nazione").val();
   }
-
-  function goToAziendaIndex(e) {
-    window.location.href = "@Url.Action("Index", "Azienda")";
+  function backToAziendaDettaglio(e) {
+    window.location.href = "@Url.Action("DettaglioAzienda", "Azienda", Model)";
   }
 </script>
 

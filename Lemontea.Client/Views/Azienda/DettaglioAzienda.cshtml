@@ -12,6 +12,7 @@
     }
 </style>
 
+<div style="margin: 4px">
 @(Html.Kendo().Button()
   .Name("goBackButton")
   .Content("Indietro")
@@ -20,6 +21,7 @@
     config.Click("goToAziendaIndex");
   })
   )
+</div>
 
 <div class="card" style="width: 18rem">
   <div class="card-header">
@@ -31,7 +33,7 @@
     <p class="card-text">🌐&nbsp; @Model.SitoWeb</p>
   </div>
 
-  <div style="margin: 4px">
+  <div style="margin-top: 4px; margin-bottom: 4px; margin-left:auto; margin-right: 4px">
     @(Html.Kendo().Button()
     .Name("editAziendaButton")
     .Content("Modifica")
