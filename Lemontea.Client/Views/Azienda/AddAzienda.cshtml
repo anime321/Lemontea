@@ -210,7 +210,7 @@
         method: editingAzienda ? 'PUT' : 'POST',
         data: $('#azienda_form').serialize(),
         success: data => {
-          window.location = '/Azienda/Index';
+          window.location = '@Url.Action("DettaglioAzienda", "Azienda", Model)';
         }
       });
     });
