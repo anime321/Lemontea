@@ -7,7 +7,7 @@
   .Content("Indietro")
   .Events(config =>
   {
-    config.Click("goToIndex");
+    config.Click("goToAziendaIndex");
   })
   )
 </div>
@@ -17,7 +17,7 @@
     return $("#Nazione").val();
   }
 
-  function goToIndex(e) {
+  function goToAziendaIndex(e) {
     window.location.href = "@Url.Action("Index", "Azienda")";
   }
 </script>

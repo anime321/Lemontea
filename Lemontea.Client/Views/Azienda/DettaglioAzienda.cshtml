@@ -6,11 +6,20 @@
     background-color: crimson;
   }
 
-  .elimina-btn:hover {
-    background-color: darkred;
-    color: #d3d3d3;
-  }
+    .elimina-btn:hover {
+      background-color: darkred;
+      color: #d3d3d3;
+    }
 </style>
+
+@(Html.Kendo().Button()
+  .Name("goBackButton")
+  .Content("Indietro")
+  .Events(config =>
+  {
+    config.Click("goToAziendaIndex");
+  })
+  )
 
 <div class="card" style="width: 18rem">
   <div class="card-header">
@@ -48,6 +57,10 @@
 </div>
 
 <script>
+  function goToAziendaIndex(e) {
+    window.location.href = "@Url.Action("Index", "Azienda")";
+  }
+
   function goToAddAzienda(e) {
     window.location.href = "@Url.Action("AddAzienda", "Azienda", Model)";
   }
