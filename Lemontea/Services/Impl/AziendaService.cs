@@ -31,7 +31,6 @@ namespace Lemontea.Services.Impl
 
     public async Task<OperationResult> GetByIdAsync(int id)
     {
-      // var azienda = await dbContext.Aziende.Where(a => a.Id == id).SingleAsync();
       var azienda = await dbContext.Aziende.Include(a => a.Contatti).Where(a => a.Id == id).FirstOrDefaultAsync();
       var aziendaDto = mapper.Map<Azienda, AziendaDto>(azienda);
 
