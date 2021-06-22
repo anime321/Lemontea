@@ -75,7 +75,8 @@ namespace Lemontea.Services.Impl
 
     public async Task<OperationResult> RemoveAsync(int id)
     {
-      var azienda = await dbContext.Aziende.FindAsync(id);
+      var azienda = await dbContext.Aziende.Include(a => a.Contatti).Where(a => a.Id == id).SingleOrDefaultAsync();
+
       dbContext.Aziende.Remove(azienda);
 
       await dbContext.SaveChangesAsync();

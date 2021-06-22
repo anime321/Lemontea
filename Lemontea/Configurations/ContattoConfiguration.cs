@@ -15,7 +15,8 @@ namespace Lemontea.Configurations
       builder
         .HasOne(c => c.Azienda)
         .WithMany(a => a.Contatti)
-        .HasForeignKey(c => c.AziendaId);
+        .HasForeignKey(c => c.AziendaId)
+        .OnDelete(DeleteBehavior.Cascade);
     }
   }
 }
