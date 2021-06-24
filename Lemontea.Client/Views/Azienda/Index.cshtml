@@ -1,4 +1,4 @@
-﻿@using Lemontea.Shared.Models.Dto 
+﻿@using Lemontea.Shared.Models.Dto
 @model List<AziendaDto>
 
 <div style="margin-top: 10px; margin-bottom: 10px;">
@@ -32,10 +32,10 @@
     //columns.Command(command => command.Custom("EditAzienda").Text("Modifica").Click("editAziendaRedirect")).Width(120);
     //columns.Command(command => command.Destroy().Text("Elimina")).Width(120);
   })
-  .ToolBar(toolbar =>
-  {
-    toolbar.Search();
-  })
+  //.ToolBar(toolbar =>
+  //{
+  //  toolbar.Search();
+  //})
   .Sortable(true)
   .DataSource(source =>
   {
@@ -50,11 +50,11 @@
         m.Field(a => a.SitoWeb);
         m.Field(a => a.Email);
       });
-      //.Destroy(config =>
-      //{
-      //  config.Action("RemoveAzienda", "Azienda");
-      //  config.Type(HttpVerbs.Delete);
-      //});
+    //.Destroy(config =>
+    //{
+    //  config.Action("RemoveAzienda", "Azienda");
+    //  config.Type(HttpVerbs.Delete);
+    //});
   })
 )
 
