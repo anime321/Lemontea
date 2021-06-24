@@ -112,48 +112,52 @@
   });
 </script>
 
-<div>
-  @(Html.Kendo().Button()
-  .Name("addContattoButton")
-  .Content("Aggiungi contatto")
-  .HtmlAttributes(new { @class = "addcontatto-btn" })
-  .Events(config =>
-  {
-    config.Click("showEditModal");
-  })
-  )
+<div class="row">
+  <div class="col">
+    @(Html.Kendo().Button()
+    .Name("addContattoButton")
+    .Content("Aggiungi contatto")
+    .HtmlAttributes(new { @class = "addcontatto-btn" })
+    .Events(config =>
+    {
+      config.Click("showEditModal");
+    })
+    )
+  </div>
 </div>
 
 <div class="row" style="margin-top: 4px; margin-bottom: 4px;">
   @foreach (var contatto in Model)
   {
-    <div class="card" style="width: 18rem; height: 14rem; margin: 4px">
+    <div class="col-4 mb-1">
+      <div class="card" style="width: 18rem; height: 10rem;">
 
-      <div class="card-header">
-        <b>@contatto.Nome @contatto.Cognome</b>
+        <div class="card-header">
+          <b>@contatto.Nome @contatto.Cognome</b>
 
-        <div class="float-right">
-          <div class="dropdown" style="cursor: pointer">
-            <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
-                <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
-              </svg>
-            </div>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <div class="dropdown-item di-edit" data-id="@contatto.Id">Modifica</div>
-              <div class="dropdown-item di-delete" data-toggle="modal" data-target="#delete_modal" data-id="@contatto.Id" href="#">Elimina</div>
+          <div class="float-right">
+            <div class="dropdown" style="cursor: pointer">
+              <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+                  <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+                </svg>
+              </div>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div class="dropdown-item di-edit" data-id="@contatto.Id">Modifica</div>
+                <div class="dropdown-item di-delete" data-toggle="modal" data-target="#delete_modal" data-id="@contatto.Id" href="#">Elimina</div>
+              </div>
             </div>
           </div>
+
         </div>
 
-      </div>
+        <div class="card-body">
 
-      <div class="card-body">
+          <p class="card-text">Email: @contatto.Email</p>
+          <p class="card-text">Telefono: @contatto.Telefono</p>
+          <p class="card-text">Cellulare: @contatto.Cellulare</p>
 
-        <p class="card-text">Email: @contatto.Email</p>
-        <p class="card-text">Telefono: @contatto.Telefono</p>
-        <p class="card-text">Cellulare: @contatto.Cellulare</p>
-
+        </div>
       </div>
     </div>
   }

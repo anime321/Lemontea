@@ -1,7 +1,8 @@
 ﻿@using Lemontea.Shared.Models.Dto;
 @model List<AziendaDto>
 
-  <div>
+<div class="row">
+  <div class="col">
 
     @using (Html.BeginForm("SearchAzienda", "Azienda", FormMethod.Get, new { @class = "form-inline row", id = "search_form_id" }))
     {
@@ -12,30 +13,36 @@
       <button type="submit" class="btn btn-primary col-1">Cerca</button>
     }
 
-    <ul class="list-group" id="azienda_search_results" style="margin-top: 5px; margin-bottom:5px">
-      @if (Model != null)
-      {
-        // init the list
-        foreach (var a in Model)
-        {
-          <li class="list-group-item">@a.RagioneSociale, @a.CodiceFiscale</li>
-        }
-      }
-    </ul>
+    <div class="row">
+      <div class="col" style="width: 100%">
+        <ul class="list-group" id="azienda_search_results" style="margin-top: 5px; margin-bottom:5px">
+          @if (Model != null)
+          {
+            // init the list
+            foreach (var a in Model)
+            {
+              <li class="list-group-item">@a.RagioneSociale, @a.CodiceFiscale</li>
+            }
+          }
+        </ul>
+      </div>
+    </div>
+
   </div>
+</div>
 
-  <script>
-    $('#search_form_id').submit(function (e) {
-      e.preventDefault();
+<script>
+  $('#search_form_id').submit(function (e) {
+    e.preventDefault();
 
-      $.ajax({
-        url: "/Azienda/SearchAzienda",
-        method: 'GET',
-        data: $('#search_form_id').serialize(),
-        success: data => {
-          // render the partial view
-          $('#azienda_search_results').html(data);
-        }
-      })
-    });
-  </script>
+    $.ajax({
+      url: "/Azienda/SearchAzienda",
+      method: 'GET',
+      data: $('#search_form_id').serialize(),
+      success: data => {
+        // render the partial view
+        $('#azienda_search_results').html(data);
+      }
+    })
+  });
+</script>

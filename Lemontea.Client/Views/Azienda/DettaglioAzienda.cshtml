@@ -12,68 +12,107 @@
     }
 </style>
 
-<div>
-  @(Html.Kendo().Button()
-  .Name("goBackButton")
-  .Content("Indietro")
-  .Events(config =>
-  {
-    config.Click("goToAziendaIndex");
-  })
-  )
+<div class="row">
+  <div class="col">
+    @(Html.Kendo().Button()
+    .Name("goBackButton")
+    .Content("Indietro")
+    .Events(config =>
+    {
+      config.Click("goToAziendaIndex");
+    })
+    )
+  </div>
 </div>
 
-<div class="card" style="width: 24rem; margin-top: 4px; margin-bottom: 4px;">
-  <div class="card-header">
-    @Model.RagioneSociale
-  </div>
-  <div class="card-body">
-    <p class="card-text">
-      <div class="row">
-        <div class="col-1">
-          <i class="fas fa-map-marker-alt" style="display: inline"></i>
-        </div>
-        <div class="col">
-          @Model.Indirizzo @Model.NCivico, @Model.Citta
+<div class="row">
+  <div class="col">
+    <div class="card" style="width: 24rem; margin-top: 4px; margin-bottom: 4px;">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-8">
+            @Model.RagioneSociale
+          </div>
+          <div class="col text-right">
+            <i class="fas fa-pencil-alt" id="editAziendaButton" style="display: inline; cursor:pointer; margin-right: 4px;"></i>
+            <i class="fas fa-trash" id="deleteAziendaButton" style="display: inline; cursor: pointer"></i>
+          </div>
         </div>
       </div>
-    </p>
-    <p class="card-text"><i class="far fa-envelope" style="display: inline"></i> @Model.Email</p>
-    <p class="card-text"><i class="fas fa-info-circle" style="display: inline"></i> @Model.SitoWeb</p>
-  </div>
+      <div class="card-body">
+        <div class="row mb-2">
+          <div class="col-1">
+            <i class="fas fa-map-marker-alt" style="display: inline"></i>
+          </div>
+          <div class="col">
+            @Model.Indirizzo @Model.NCivico, @Model.Citta
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-1">
+            <i class="far fa-envelope" style="display: inline"></i>
+          </div>
+          <div class="col">
+            @Model.Email
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-1">
+            <i class="fas fa-info-circle" style="display: inline"></i>
+          </div>
+          <div class="col">
+            @Model.SitoWeb
+          </div>
+        </div>
+        </p>
+      </div>
 
-  <div style="margin-top: 4px; margin-bottom: 4px; margin-left:auto; margin-right: 4px">
-    @(Html.Kendo().Button()
-      .Name("editAziendaButton")
-      .Content("Modifica")
-      .Events(config =>
-      {
-        config.Click("goToAddAzienda");
-      })
-    )
-    @(Html.Kendo().Button()
-      .Name("deleteAziendaButton")
-      .Content("Elimina")
-      .HtmlAttributes(new { @class = "elimina-btn" })
-      .Events(config =>
-      {
-        config.Click("removeAzienda");
-      })
-    )
+      @*<div style="margin-top: 4px; margin-bottom: 4px; margin-left:auto; margin-right: 4px">
+          @(Html.Kendo().Button()
+          .Name("editAziendaButton")
+          .Content("Modifica")
+          .Events(config =>
+          {
+            config.Click("goToAddAzienda");
+          })
+        )
+          @(Html.Kendo().Button()
+          .Name("deleteAziendaButton")
+          .Content("Elimina")
+          .HtmlAttributes(new { @class = "elimina-btn" })
+          .Events(config =>
+          {
+            config.Click("removeAzienda");
+          })
+        )
+        </div>*@
+    </div>
   </div>
 </div>
 
-<div>
-  @await Html.PartialAsync("_ContattiAzienda", Model.Contatti)
+<div class="row mt-2">
+  <div class="col">
+    @await Html.PartialAsync("_ContattiAzienda", Model.Contatti)
+  </div>
 </div>
 
 
 <script>
-  function goToAziendaIndex(e) {
+  $(document).ready(() => {
+    $('#editAziendaButton').click(e => {
+      goToAddAzienda();
+    });
+
+    $('#deleteAziendaButton').click(e => {
+      removeAzienda();
+    });
+  })
+
+  function goToAziendaIndex() {
     window.location.href = "@Url.Action("Index", "Azienda")";
   }
 
-  function goToAddAzienda(e) {
+  function goToAddAzienda() {
     window.location.href = "@Url.Action("AddAzienda", "Azienda", Model)";
   }
 
