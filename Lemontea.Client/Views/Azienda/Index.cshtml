@@ -28,7 +28,7 @@
     columns.Bound(m => m.Telefono);
     columns.Bound(m => m.SitoWeb);
     columns.Bound(m => m.Email);
-    columns.Command(command => command.Custom("DettaglioAzienda").Text("➡️").Click("dettaglioAziendaRedirect")).Width(60);
+    columns.Command(command => command.Custom("DettaglioAzienda").Text("<i class=\"fas fa-arrow-circle-right\"></i>").Click("dettaglioAziendaRedirect")).Width(60);
     //columns.Command(command => command.Custom("EditAzienda").Text("Modifica").Click("editAziendaRedirect")).Width(120);
     //columns.Command(command => command.Destroy().Text("Elimina")).Width(120);
   })

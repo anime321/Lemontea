@@ -12,8 +12,8 @@
     }
 </style>
 
-<div style="margin: 4px">
-@(Html.Kendo().Button()
+<div>
+  @(Html.Kendo().Button()
   .Name("goBackButton")
   .Content("Indietro")
   .Events(config =>
@@ -23,33 +23,42 @@
   )
 </div>
 
-<div class="card" style="width: 24rem">
+<div class="card" style="width: 24rem; margin-top: 4px; margin-bottom: 4px;">
   <div class="card-header">
     @Model.RagioneSociale
   </div>
   <div class="card-body">
-    <p class="card-text">📍&nbsp; @Model.Indirizzo @Model.NCivico, @Model.Citta</p>
-    <p class="card-text">📧 @Model.Email</p>
-    <p class="card-text">🌐&nbsp; @Model.SitoWeb</p>
+    <p class="card-text">
+      <div class="row">
+        <div class="col-1">
+          <i class="fas fa-map-marker-alt" style="display: inline"></i>
+        </div>
+        <div class="col">
+          @Model.Indirizzo @Model.NCivico, @Model.Citta
+        </div>
+      </div>
+    </p>
+    <p class="card-text"><i class="far fa-envelope" style="display: inline"></i> @Model.Email</p>
+    <p class="card-text"><i class="fas fa-info-circle" style="display: inline"></i> @Model.SitoWeb</p>
   </div>
 
   <div style="margin-top: 4px; margin-bottom: 4px; margin-left:auto; margin-right: 4px">
     @(Html.Kendo().Button()
-    .Name("editAziendaButton")
-    .Content("Modifica")
-    .Events(config =>
-    {
-      config.Click("goToAddAzienda");
-    })
-  )
+      .Name("editAziendaButton")
+      .Content("Modifica")
+      .Events(config =>
+      {
+        config.Click("goToAddAzienda");
+      })
+    )
     @(Html.Kendo().Button()
-    .Name("deleteAziendaButton")
-    .Content("Elimina")
-    .HtmlAttributes(new { @class = "elimina-btn" })
-    .Events(config =>
-    {
-      config.Click("removeAzienda");
-    })
+      .Name("deleteAziendaButton")
+      .Content("Elimina")
+      .HtmlAttributes(new { @class = "elimina-btn" })
+      .Events(config =>
+      {
+        config.Click("removeAzienda");
+      })
     )
   </div>
 </div>
@@ -57,6 +66,7 @@
 <div>
   @await Html.PartialAsync("_ContattiAzienda", Model.Contatti)
 </div>
+
 
 <script>
   function goToAziendaIndex(e) {

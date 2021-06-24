@@ -112,10 +112,10 @@
   });
 </script>
 
-<div style="margin-top: 10px; margin-bottom: 10px">
+<div>
   @(Html.Kendo().Button()
   .Name("addContattoButton")
-  .Content("➕ Aggiungi contatto")
+  .Content("Aggiungi contatto")
   .HtmlAttributes(new { @class = "addcontatto-btn" })
   .Events(config =>
   {
@@ -124,7 +124,7 @@
   )
 </div>
 
-<div class="row">
+<div class="row" style="margin-top: 4px; margin-bottom: 4px;">
   @foreach (var contatto in Model)
   {
     <div class="card" style="width: 18rem; height: 14rem; margin: 4px">
@@ -167,8 +167,6 @@
         <h4 class="modal-title">
           Salva contatto
         </h4>
-        @*<button type="button" class="close" data-dismiss="modal" aria-label="Close" />*@
-        @*<i class="fas fa-close" data-dismiss="modal" aria-label="Close" />*@
       </div>
 
       <div id="editing_modal_body" class="modal-body"></div>
@@ -188,7 +186,6 @@
 
       <div class="modal-header">
         <h4 class="modal-title">Elimina contatto</h4>
-        @*<button type="button" class="close" data-dismiss="modal" aria-label="Close" />*@
       </div>
 
       <div class="modal-body">
