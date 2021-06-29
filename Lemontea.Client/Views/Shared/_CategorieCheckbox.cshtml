@@ -1,0 +1,16 @@
+﻿@using Lemontea.Shared.Models.Dto;
+@model CategoryDto
+
+@(Html.Kendo().DropDownList()
+  .Name("CategorieAzienda")
+  .DataTextField("description")
+  .DataValueField("id")
+  .Template("<input type='checkbox' name='cb' value='#:data.Id#' /> #:data.Id#")
+  .DataSource(source =>
+  {
+    source.Read(read =>
+    {
+      read.Action("Index", "Category");
+    });
+  })
+)

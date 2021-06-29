@@ -15,5 +15,6 @@ namespace Lemontea.Services
     Task<OperationResult> EditAsync(AziendaDto aziendaDto);
     Task<OperationResult> RemoveAsync(int id);
     Task<OperationResult> SearchAziende(string ragioneSocialePattern, string codiceFiscalePattern);
+    Task<OperationResult> CategoriesByIdAsync(int id);
   }
 }

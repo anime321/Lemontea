@@ -14,6 +14,7 @@ namespace Lemontea
     public DbSet<Country> Countries { get; set; }
     public DbSet<State> States { get; set; }
     public DbSet<Contatto> Contatti { get; set; }
+    public DbSet<Category> Categorie { get; set; }
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 

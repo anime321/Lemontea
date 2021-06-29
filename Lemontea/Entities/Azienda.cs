@@ -27,5 +27,6 @@ namespace Lemontea.Entities
     public string CodiceFiscale { get; set; }
 
     public List<Contatto> Contatti { get; set; }
+    public List<Category> Categorie { get; set; }
   }
 }

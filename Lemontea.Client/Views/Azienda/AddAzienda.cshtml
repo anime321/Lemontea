@@ -81,39 +81,39 @@
     <div class="form-group col">
       @Html.LabelFor(model => model.Nazione, "Nazione")
       @(Html.Kendo().DropDownListFor(m => m.Nazione)
-        .DataTextField("countryName")
-        .DataValueField("alpha2Code")
-        .OptionLabel("Select country...")
-        .HtmlAttributes(new { @class = "form-control" })
-        .DataSource(source =>
+      .DataTextField("countryName")
+      .DataValueField("alpha2Code")
+      .OptionLabel("Select country...")
+      .HtmlAttributes(new { @class = "form-control" })
+      .DataSource(source =>
+      {
+        source.Read(read =>
         {
-          source.Read(read =>
-          {
-            read.Action("Get_Countries", "Country");
-          })
-          .ServerFiltering(false);
+          read.Action("Get_Countries", "Country");
         })
+        .ServerFiltering(false);
+      })
       )
 
     </div>
     <div class="form-group col">
       @Html.LabelFor(model => model.Provincia, "Provincia")
       @(Html.Kendo().DropDownListFor(m => m.Provincia)
-        .DataTextField("stateName")
-        .DataValueField("alpha2Code")
-        .OptionLabel("Select state...")
-        .HtmlAttributes(new { @class = "form-control" })
-        .DataSource(source =>
+      .DataTextField("stateName")
+      .DataValueField("alpha2Code")
+      .OptionLabel("Select state...")
+      .HtmlAttributes(new { @class = "form-control" })
+      .DataSource(source =>
+      {
+        source.Read(read =>
         {
-          source.Read(read =>
-          {
-            read.Action("Get_StatesByCountry", "Country").Data("getSelectedCountry");
-          })
-          .ServerFiltering(true);
+          read.Action("Get_StatesByCountry", "Country").Data("getSelectedCountry");
         })
+        .ServerFiltering(true);
+      })
       //.Enable(false)
-        .AutoBind(false)
-        .CascadeFrom("Nazione")
+      .AutoBind(false)
+      .CascadeFrom("Nazione")
       )
     </div>
     <div class="form-group col">
@@ -128,30 +128,30 @@
 
       @Html.LabelFor(model => model.Telefono, "Telefono")
       @(Html.Kendo().MultiColumnComboBoxFor(m => m.Telefono)
-          .Placeholder("Telefono")
-          .DataTextField("phoneCode")
-          .DataValueField("alpha2Code")
-          .DropDownWidth("100px")
-          .HtmlAttributes(new { @class = "form-control" })
-          .Columns(columns =>
-          {
-            columns.Add().Field("phoneCode").Title("Prefisso").Width("80px");
-            columns.Add().Field("countryName").Title("Nazione").Width("200px");
-          })
-          .Filter(FilterType.Contains)
-          .FilterFields(new string[]
-          {
+        .Placeholder("Telefono")
+        .DataTextField("phoneCode")
+        .DataValueField("alpha2Code")
+        .DropDownWidth("100px")
+        .HtmlAttributes(new { @class = "form-control" })
+        .Columns(columns =>
+        {
+          columns.Add().Field("phoneCode").Title("Prefisso").Width("80px");
+          columns.Add().Field("countryName").Title("Nazione").Width("200px");
+        })
+        .Filter(FilterType.Contains)
+        .FilterFields(new string[]
+        {
             "countryName",
             "phoneCode"
           })
-          .DataSource(source =>
+        .DataSource(source =>
+        {
+          source.Read(read =>
           {
-            source.Read(read =>
-            {
-              read.Action("Get_Countries", "Country");
-            })
-            .ServerFiltering(false);
+            read.Action("Get_Countries", "Country");
           })
+          .ServerFiltering(false);
+        })
       )
 
     </div>
@@ -188,6 +188,10 @@
       @Html.ValidationMessageFor(model => model.CodiceFiscale, "", new { @class = "text-danger" })
     </div>
   </div>
+
+  // TODO:
+  //CATEGORIES
+  //
 
   <div class="row col">
     <button type="submit" id="submit_button" class="btn btn-primary">Save</button>

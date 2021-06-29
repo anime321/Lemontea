@@ -12,6 +12,9 @@ namespace Lemontea.Configurations
   {
     public void Configure(EntityTypeBuilder<Azienda> builder)
     {
+      builder.HasMany(a => a.Categorie)
+        .WithMany(c => c.Aziende)
+        .UsingEntity(b => b.ToTable("AziendeCategorie"));
     }
   }
 }

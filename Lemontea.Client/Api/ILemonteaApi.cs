@@ -50,5 +50,9 @@ namespace Lemontea.Client.Api
 
     [Delete("/contatto/{id}")]
     Task RemoveContatto(int id);
+
+
+    [Get("/category")]
+    Task<List<CategoryDto>> GetCategories();
   }
 }

@@ -122,5 +122,13 @@ namespace Lemontea.Services.Impl
 
       return OperationResult.Ok(aziendeDto);
     }
+
+    public async Task<OperationResult> CategoriesByIdAsync(int id)
+    {
+      var azienda = await dbContext.Aziende.Include(a => a.Categorie).Where(a => a.Id == id).SingleOrDefaultAsync();
+      var categorieDto = mapper.Map<List<Category>, List<CategoryDto>>(azienda.Categorie);
+
+      return OperationResult.Ok(categorieDto);
+    }
   }
 }

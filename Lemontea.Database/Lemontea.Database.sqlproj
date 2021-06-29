@@ -61,6 +61,8 @@
   <ItemGroup>
     <Build Include="Tables\Aziende.sql" />
     <Build Include="Tables\Contatti.sql" />
+    <Build Include="Tables\Categories.sql" />
+    <Build Include="Tables\AziendeCategorie.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Lemontea.Database.refactorlog" />

@@ -18,7 +18,8 @@ namespace Lemontea.Extensions
         typeof(AziendaProfile),
         typeof(CountryProfile),
         typeof(StateProfile),
-        typeof(ContattoProfile)
+        typeof(ContattoProfile),
+        typeof(CategoryProfile)
       };
 
       services.AddAutoMapper(profileTypeArray);
@@ -26,6 +27,7 @@ namespace Lemontea.Extensions
       services.AddScoped<IAziendaService, AziendaService>();
       services.AddScoped<ICountryService, CountryService>();
       services.AddScoped<IContattoService, ContattoService>();
+      services.AddScoped<ICategoryService, CategoryService>();
     }
   }
 }

@@ -45,6 +45,7 @@ namespace Lemontea.Client
       services.AddScoped<IAziendaService, AziendaService>();
       services.AddScoped<ICountryService, CountryService>();
       services.AddScoped<IContattoService, ContattoService>();
+      services.AddScoped<ICategoryService, CategoryService>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

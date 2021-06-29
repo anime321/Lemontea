@@ -62,6 +62,7 @@ namespace Lemontea.Shared.Models.Dto
     public string CodiceFiscale { get; set; }
 
     public List<ContattoDto> Contatti { get; set; }
+    public List<CategoryDto> Categorie { get; set; }
   }
 }
 
