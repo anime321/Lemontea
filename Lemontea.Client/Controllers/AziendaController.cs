@@ -55,9 +55,9 @@ namespace Lemontea.Client.Controllers
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> SaveAzienda(AziendaDto aziendaDto)
+    public async Task<IActionResult> SaveAzienda(AziendaSaveRequest aziendaSaveRequest)
     {
-      await aziendaService.SaveAsync(aziendaDto);
+      await aziendaService.SaveAsync(aziendaSaveRequest);
       return Ok();
     }
 

@@ -64,7 +64,18 @@
             @Model.SitoWeb
           </div>
         </div>
-        </p>
+
+        <div class="row mb-2">
+          <ul>
+            @foreach (var c in Model.Categorie)
+            {
+              <li>
+                @c.Description
+              </li>
+            }
+          </ul>
+        </div>
+
       </div>
     </div>
   </div>

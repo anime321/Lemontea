@@ -1,0 +1,17 @@
+﻿@using Lemontea.Shared.Models.Dto
+@model List<CategoryDto>
+
+@foreach (var category in Model)
+{
+  <div class="row">
+    <div class="col">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="@category.Id" name="Categorie" id="categorie_checkbox_@category.Id" />
+        <label class="form-check-label" for="categorie_checkbox_@category.Id">
+          @category.Description
+        </label>
+      </div>
+    </div>
+  </div>
+}
+

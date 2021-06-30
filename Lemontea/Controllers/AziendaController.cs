@@ -40,9 +40,9 @@ namespace Lemontea.Controllers
     }
 
     [HttpPost]
-    public async Task<IActionResult> Save(AziendaDto aziendaDto)
+    public async Task<IActionResult> Save(AziendaSaveRequest aziendaSaveRequest)
     {
-      var result = await aziendaService.SaveAsync(aziendaDto);
+      var result = await aziendaService.SaveAsync(aziendaSaveRequest);
       var response = CreateResponse(result);
 
       return response;

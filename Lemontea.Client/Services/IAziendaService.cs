@@ -11,7 +11,7 @@ namespace Lemontea.Client.Services
   {
     Task<List<AziendaDto>> GetAsync();
     Task<AziendaDto> GetByIdAsync(int id);
-    Task<AziendaDto> SaveAsync(AziendaDto aziendaDto);
+    Task<AziendaDto> SaveAsync(AziendaSaveRequest aziendaSaveRequest);
     Task<AziendaDto> EditAsync(AziendaDto aziendaDto);
     Task RemoveAsync(int id);
     Task<List<AziendaDto>> SearchAsync(string ragioneSocialePattern, string codiceFiscalePattern);

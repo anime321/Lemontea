@@ -189,9 +189,12 @@
     </div>
   </div>
 
-  // TODO:
-  //CATEGORIES
-  //
+  <div class="row">
+    <div class="form-group col">
+      @Html.Label("Categorie")
+      <div id="categorie_checkbox"></div>
+    </div>
+  </div>
 
   <div class="row col">
     <button type="submit" id="submit_button" class="btn btn-primary">Save</button>
@@ -202,10 +205,21 @@
   @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
   <script>
+    $(document).ready(() => {
+      // render categorie checkbox partial
+      $.ajax({
+        url: '/Category/CategoriesCheckBoxes',
+        method: 'GET',
+        success: data => {
+          $('#categorie_checkbox').html(data);
+        }
+      })
+    });
+
     function getSelectedCountry() {
       return {
         alpha2Code: $("#Nazione").val().toString()
-      }
+      };
     }
 
     //$("#Nazione").change(e => {
@@ -224,7 +238,8 @@
         method: editingAzienda ? 'PUT' : 'POST',
         data: $('#azienda_form').serialize(),
         success: data => {
-          window.location = '@Url.Action("DettaglioAzienda", "Azienda", Model)';
+          @*window.location = '@Url.Action("DettaglioAzienda", "Azienda", Model)';*@
+          window.location = '@Url.Action("Index", "Azienda")';
         }
       });
     });

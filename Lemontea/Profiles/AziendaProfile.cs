@@ -13,6 +13,11 @@ namespace Lemontea.Profiles
     public AziendaProfile()
     {
       CreateMap<Azienda, AziendaDto>().ReverseMap();
+      CreateMap<AziendaSaveRequest, Azienda>()
+        .ForMember(
+          dest => dest.Categorie,
+          opt => opt.MapFrom(src => src.Categorie.Select(c => new Category(c)).ToList())
+        );
     }
   }
 }

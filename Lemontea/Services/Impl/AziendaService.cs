@@ -31,20 +31,25 @@ namespace Lemontea.Services.Impl
 
     public async Task<OperationResult> GetByIdAsync(int id)
     {
-      var azienda = await dbContext.Aziende.Include(a => a.Contatti).Where(a => a.Id == id).FirstOrDefaultAsync();
+      var azienda = await dbContext.Aziende.Include(a => a.Contatti).Include(a => a.Categorie).Where(a => a.Id == id).FirstOrDefaultAsync();
       var aziendaDto = mapper.Map<Azienda, AziendaDto>(azienda);
 
       return OperationResult.Ok(aziendaDto);
     }
 
-    public async Task<OperationResult> SaveAsync(AziendaDto aziendaDto)
+    public async Task<OperationResult> SaveAsync(AziendaSaveRequest aziendaSaveRequest)
     {
-      var azienda = mapper.Map<AziendaDto, Azienda>(aziendaDto);
+      var azienda = mapper.Map<AziendaSaveRequest, Azienda>(aziendaSaveRequest);
+
+      foreach (var c in azienda.Categorie)
+      {
+        dbContext.Entry(c).State = EntityState.Unchanged;
+      }
 
       await dbContext.Aziende.AddAsync(azienda);
       await dbContext.SaveChangesAsync();
 
-      aziendaDto.Id = azienda.Id;
+      var aziendaDto = mapper.Map<Azienda, AziendaDto>(azienda);
 
       return OperationResult.Ok(aziendaDto);
     }
