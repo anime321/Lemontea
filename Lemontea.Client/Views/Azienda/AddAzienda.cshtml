@@ -204,7 +204,7 @@
 @section Scripts {
   @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-  <script>
+  <script type="text/javascript">
     $(document).ready(() => {
       // render categorie checkbox partial
       $.ajax({
@@ -212,6 +212,13 @@
         method: 'GET',
         success: data => {
           $('#categorie_checkbox').html(data);
+
+          if (editingAzienda) {
+            @foreach (var c in Model.Categorie)
+            {
+              @:$('#categorie_checkbox_@c.Id').prop('checked', true);
+            }
+          }
         }
       })
     });
