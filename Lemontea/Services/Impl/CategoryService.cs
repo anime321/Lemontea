@@ -28,5 +28,13 @@ namespace Lemontea.Services.Impl
 
       return OperationResult.Ok(categorieDto);
     }
+
+    public async Task<OperationResult> GetByIdAsync(Guid id)
+    {
+      var category = await dbContext.Categorie.FindAsync(id);
+      var categoryDto = mapper.Map<Category, CategoryDto>(category);
+
+      return OperationResult.Ok(categoryDto);
+    }
   }
 }

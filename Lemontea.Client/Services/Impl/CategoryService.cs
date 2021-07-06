@@ -20,5 +20,10 @@ namespace Lemontea.Client.Services.Impl
     {
       return await lemonteaApi.GetCategories();
     }
+
+    public async Task<CategoryDto> GetByIdAsync(Guid id)
+    {
+      return await lemonteaApi.GetCategoryById(id);
+    }
   }
 }

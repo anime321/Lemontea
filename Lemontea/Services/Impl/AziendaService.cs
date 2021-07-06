@@ -14,9 +14,11 @@ namespace Lemontea.Services.Impl
   {
     private readonly ApplicationDbContext dbContext;
     private readonly IMapper mapper;
+    private readonly ICategoryService categoryService;
 
-    public AziendaService(ApplicationDbContext dbContext, IMapper mapper)
+    public AziendaService(ICategoryService categoryService, ApplicationDbContext dbContext, IMapper mapper)
     {
+      this.categoryService = categoryService;
       this.dbContext = dbContext;
       this.mapper = mapper;
     }
@@ -72,8 +74,6 @@ namespace Lemontea.Services.Impl
       aziendaEntry.SitoWeb        = aziendaSaveRequest.SitoWeb;
       aziendaEntry.PartitaIVA     = aziendaSaveRequest.PartitaIVA;
       aziendaEntry.CodiceFiscale  = aziendaSaveRequest.CodiceFiscale;
-
-      aziendaEntry.Categorie = mapper.Map<AziendaSaveRequest, Azienda>(aziendaSaveRequest).Categorie;
 
       foreach (var c in aziendaEntry.Categorie)
       {

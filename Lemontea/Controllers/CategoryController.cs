@@ -28,5 +28,14 @@ namespace Lemontea.Controllers
 
       return response;
     }
+
+    [HttpGet("id")]
+    public async Task<IActionResult> GetById(Guid id)
+    {
+      var result = await categoryService.GetByIdAsync(id);
+      var response = CreateResponse(result);
+
+      return response;
+    }
   }
 }

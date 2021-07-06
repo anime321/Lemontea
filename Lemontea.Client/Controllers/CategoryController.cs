@@ -22,14 +22,6 @@ namespace Lemontea.Client.Controllers
       this.logger = logger;
     }
 
-    //[HttpGet]
-    //public async Task<IActionResult> Index()
-    //{
-    //  var categorie = await categoryService.GetAsync();
-
-    //  return Ok(categorie);
-    //}
-
     [HttpGet]
     public async Task<IActionResult> CategoriesCheckBoxes(int id)
     {

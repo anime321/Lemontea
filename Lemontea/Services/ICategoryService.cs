@@ -9,5 +9,6 @@ namespace Lemontea.Services
   public interface ICategoryService
   {
     Task<OperationResult> GetAsync();
+    Task<OperationResult> GetByIdAsync(Guid id);
   }
 }

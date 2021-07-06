@@ -57,5 +57,8 @@ namespace Lemontea.Client.Api
 
     [Get("/category")]
     Task<List<CategoryDto>> GetCategories();
+
+    [Get("/category/{id}")]
+    Task<CategoryDto> GetCategoryById(Guid id);
   }
 }
