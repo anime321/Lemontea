@@ -12,6 +12,7 @@ namespace Lemontea.Shared.Models.Dto
     public Guid Id { get; set; }
     public string Description { get; set; }
     public int DisplayOrder { get; set;  }
+    public bool IsChecked { get; set; }
 
     [JsonIgnore]
     public List<AziendaDto> Aziende;

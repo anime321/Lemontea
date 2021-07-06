@@ -5,5 +5,7 @@
     [Cognome] NVARCHAR(50) NOT NULL, 
     [Email] NVARCHAR(50) NOT NULL, 
     [Telefono] NVARCHAR(50) NULL, 
-    [Cellulare] NVARCHAR(50) NULL
+    [Cellulare] NVARCHAR(50) NULL, 
+    [AziendaId] INT NOT NULL, 
+    CONSTRAINT [FK_Contatti_Aziende] FOREIGN KEY ([AziendaId]) REFERENCES [Aziende]([Id])
 )

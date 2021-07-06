@@ -213,12 +213,12 @@
         success: data => {
           $('#categorie_checkbox').html(data);
 
-          if (editingAzienda) {
+          @*if (editingAzienda) {
             @foreach (var c in Model.Categorie)
             {
               @:$('#categorie_checkbox_@c.Id').prop('checked', true);
             }
-          }
+          }*@
         }
       })
     });

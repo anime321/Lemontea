@@ -28,6 +28,9 @@ namespace Lemontea.Client.Api
     [Get("/azienda/search")]
     Task<List<AziendaDto>> SearchAziende(string ragioneSocialePattern, string codiceFiscalePattern);
 
+    [Get("/azienda/categories")]
+    Task<List<CategoryDto>> Categories(int id);
+
 
     [Get("/country")]
     Task<List<CountryDto>> GetCountries();
