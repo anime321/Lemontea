@@ -206,19 +206,24 @@
 
   <script type="text/javascript">
     $(document).ready(() => {
+      @if (Model != null)
+      {
+        @:let aziendaId = @Model.Id;
+      }
+      else
+      {
+        @:let aziendaId = 0;
+      }
+
       // render categorie checkbox partial
       $.ajax({
-        url: '/Category/CategoriesCheckBoxes',
+      url: '/Category/CategoriesCheckBoxes',
         method: 'GET',
+        data: {
+        id: aziendaId
+        },
         success: data => {
           $('#categorie_checkbox').html(data);
-
-          @*if (editingAzienda) {
-            @foreach (var c in Model.Categorie)
-            {
-              @:$('#categorie_checkbox_@c.Id').prop('checked', true);
-            }
-          }*@
         }
       })
     });

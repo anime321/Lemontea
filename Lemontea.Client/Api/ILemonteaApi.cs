@@ -20,7 +20,7 @@ namespace Lemontea.Client.Api
     Task<ApiResponse<AziendaDto>> SaveAzienda(AziendaSaveRequest aziendaSaveRequest);
 
     [Put("/azienda")]
-    Task<AziendaDto> EditAzienda(AziendaDto aziendaDto);
+    Task<AziendaDto> EditAzienda(AziendaSaveRequest aziendaSaveRequest);
 
     [Delete("/azienda/{id}")]
     Task RemoveAzienda(int id);

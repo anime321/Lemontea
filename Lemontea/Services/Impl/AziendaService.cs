@@ -31,16 +31,7 @@ namespace Lemontea.Services.Impl
 
     public async Task<OperationResult> GetByIdAsync(int id)
     {
-      Azienda azienda = new Azienda();
-
-      try
-      {
-        azienda = await dbContext.Aziende.Include(a => a.Contatti).Include(a => a.Categorie).Where(a => a.Id == id).FirstOrDefaultAsync();
-      } catch (Exception e)
-      {
-        Console.Write("=========================");
-        Console.Write(e.Message);
-      }
+      var azienda = await dbContext.Aziende.Include(a => a.Contatti).Include(a => a.Categorie).Where(a => a.Id == id).FirstOrDefaultAsync();
 
       var aziendaDto = mapper.Map<Azienda, AziendaDto>(azienda);
 
@@ -64,27 +55,35 @@ namespace Lemontea.Services.Impl
       return OperationResult.Ok(aziendaDto);
     }
 
-    public async Task<OperationResult> EditAsync(AziendaDto aziendaDto)
+    public async Task<OperationResult> EditAsync(AziendaSaveRequest aziendaSaveRequest)
     {
-      var azienda = await dbContext.Aziende.FindAsync(aziendaDto.Id);
+      var aziendaEntry = await dbContext.Aziende.Include(a => a.Categorie).Where(a => a.Id == aziendaSaveRequest.Id).FirstOrDefaultAsync();
 
-      azienda.RagioneSociale = aziendaDto.RagioneSociale;
-      azienda.Indirizzo      = aziendaDto.Indirizzo;
-      azienda.NCivico        = aziendaDto.NCivico;
-      azienda.CAP            = aziendaDto.CAP;
-      azienda.Nazione        = aziendaDto.Nazione;
-      azienda.Provincia      = aziendaDto.Provincia;
-      azienda.Citta          = aziendaDto.Citta;
-      azienda.Telefono       = aziendaDto.Telefono;
-      azienda.Fax            = aziendaDto.Fax;
-      azienda.Email          = aziendaDto.Email;
-      azienda.SitoWeb        = aziendaDto.SitoWeb;
-      azienda.PartitaIVA     = aziendaDto.PartitaIVA;
-      azienda.CodiceFiscale  = aziendaDto.CodiceFiscale;
+      aziendaEntry.RagioneSociale = aziendaSaveRequest.RagioneSociale;
+      aziendaEntry.Indirizzo      = aziendaSaveRequest.Indirizzo;
+      aziendaEntry.NCivico        = aziendaSaveRequest.NCivico;
+      aziendaEntry.CAP            = aziendaSaveRequest.CAP;
+      aziendaEntry.Nazione        = aziendaSaveRequest.Nazione;
+      aziendaEntry.Provincia      = aziendaSaveRequest.Provincia;
+      aziendaEntry.Citta          = aziendaSaveRequest.Citta;
+      aziendaEntry.Telefono       = aziendaSaveRequest.Telefono;
+      aziendaEntry.Fax            = aziendaSaveRequest.Fax;
+      aziendaEntry.Email          = aziendaSaveRequest.Email;
+      aziendaEntry.SitoWeb        = aziendaSaveRequest.SitoWeb;
+      aziendaEntry.PartitaIVA     = aziendaSaveRequest.PartitaIVA;
+      aziendaEntry.CodiceFiscale  = aziendaSaveRequest.CodiceFiscale;
+
+      aziendaEntry.Categorie = mapper.Map<AziendaSaveRequest, Azienda>(aziendaSaveRequest).Categorie;
+
+      foreach (var c in aziendaEntry.Categorie)
+      {
+        dbContext.Entry(c).State = EntityState.Unchanged;
+      }
 
       await dbContext.SaveChangesAsync();
 
-      return OperationResult.Ok(aziendaDto);
+      var aziendaResp = mapper.Map<Azienda, AziendaDto>(aziendaEntry);
+      return OperationResult.Ok(aziendaResp);
     }
 
     public async Task<OperationResult> RemoveAsync(int id)

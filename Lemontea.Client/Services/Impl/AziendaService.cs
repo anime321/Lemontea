@@ -38,9 +38,9 @@ namespace Lemontea.Client.Services.Impl
       return response.Content;
     }
 
-    public async Task<AziendaDto> EditAsync(AziendaDto aziendaDto)
+    public async Task<AziendaDto> EditAsync(AziendaSaveRequest aziendaSaveRequest)
     {
-      return await lemonteaApi.EditAzienda(aziendaDto);
+      return await lemonteaApi.EditAzienda(aziendaSaveRequest);
     }
 
     public async Task RemoveAsync(int id)

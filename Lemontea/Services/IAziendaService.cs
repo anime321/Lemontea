@@ -12,7 +12,7 @@ namespace Lemontea.Services
     Task<OperationResult> GetAsync();
     Task<OperationResult> GetByIdAsync(int id);
     Task<OperationResult> SaveAsync(AziendaSaveRequest aziendaSaveRequest);
-    Task<OperationResult> EditAsync(AziendaDto aziendaDto);
+    Task<OperationResult> EditAsync(AziendaSaveRequest aziendaSaveRequest);
     Task<OperationResult> RemoveAsync(int id);
     Task<OperationResult> SearchAziende(string ragioneSocialePattern, string codiceFiscalePattern);
     Task<OperationResult> CategoriesByIdAsync(int id);

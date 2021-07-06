@@ -6,10 +6,12 @@
   <div class="row">
     <div class="col">
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="@category.Id" name="Categorie" id="categorie_checkbox_@category.Id" />
+        @Html.CheckBox("Categorie", category.IsChecked, new { @class = "form-check-input", value = category.Id })
+        @Html.Label("CategoriaLabel", category.Description, new { @class = "form-check-label" })
+        @*<input class="form-check-input" type="checkbox" value="@category.Id" name="Categorie" id="categorie_checkbox_@category.Id" />
         <label class="form-check-label" for="categorie_checkbox_@category.Id">
           @category.Description
-        </label>
+        </label>*@
       </div>
     </div>
   </div>

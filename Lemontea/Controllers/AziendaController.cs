@@ -49,9 +49,9 @@ namespace Lemontea.Controllers
     }
 
     [HttpPut]
-    public async Task<IActionResult> Edit(AziendaDto aziendaDto)
+    public async Task<IActionResult> Edit(AziendaSaveRequest aziendaSaveRequest)
     {
-      var result = await aziendaService.EditAsync(aziendaDto);
+      var result = await aziendaService.EditAsync(aziendaSaveRequest);
       var response = CreateResponse(result);
 
       return response;
